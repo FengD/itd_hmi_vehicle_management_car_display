@@ -1,0 +1,13 @@
+goodstudydayup	5efaacc279af5490e4b90c7160cb29e8	Web端
+
+path: [{latitude:39.9784437501,longitude:116.3522046804},
+        {latitude:39.9784807462,longitude:116.3534921408},
+        {latitude:39.9789986896,longitude:116.3534545898},
+        {latitude:39.9790356854,longitude:116.3521778584},
+        {latitude:39.9784437501,longitude:116.3522046804}]
+
+
+center: {
+        longitude: 116.353015,
+        latitude: 39.978694,
+      }
