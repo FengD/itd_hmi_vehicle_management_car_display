@@ -11,6 +11,7 @@ const { Row } = Grid;
 const FormItem = Form.Item;
 
 function UserLogin(props) {
+  var login_res;
   const { loading, request } = useRequest(userLogin);
   console.log("loading",loading,'/n',"request",request)
   const [value, setValue] = useState({
@@ -33,9 +34,11 @@ function UserLogin(props) {
 
   async function handleLogin(params) {
     try {
-      await request({
+      login_res = await request({
         data: params,
       });
+      console.log('login_res',login_res);
+      localStorage.setItem('token', login_res.token)
       Message.success('登录成功');
       props.history.push('/dashboard');
     } catch (err) {

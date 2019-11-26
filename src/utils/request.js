@@ -14,7 +14,9 @@ import { Message } from '@alifd/next';
 export async function request(options) {
   try {
     const response = await axios(options);
+    console.log("response",response);
     const { data, error } = handleResponse(response);
+    console.log("data, error",data, error);
     if (error) {
       throw error;
     } else {
@@ -70,6 +72,7 @@ export function useRequest(options) {
           type: 'success',
           response,
         });
+        console.log("response, data",response, data)
         return { response, data };
       }
     } catch (error) {

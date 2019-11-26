@@ -76,4 +76,16 @@ module.exports = {
       },
     ],
   },
+
+  'GET /api/cardata': {
+    status: 'SUCCESS',
+    data: {
+        carid: '1',
+        name: '一号车',
+        department: 'ITD_AI',
+        longitude: 116.353015,
+        latitude: 39.978694,
+        speed: 100,
+    },
+  },
 };
