@@ -11,7 +11,7 @@ export default {
         speed: '',
     },
 
-    async fetchData() {
+    async fetchCarData() {
         const { data } = await request(carData);
         const { carid, name, department, longitude, latitude, speed } = data.data;
         this.carinfo = { carid, name, department, longitude, latitude, speed };

@@ -23,18 +23,18 @@ const asideMenuConfig = [
     name: '监控页',
     path: '/dashboard',
   },
-  {
-    name: '设备管理',
-    path: '/home',
-  },
-  {
-    name: '设备编辑',
-    path: '/edit',
-  },
-  {
-    name: '设备查看',
-    path: '/view',
-  },
+  // {
+  //   name: '设备管理',
+  //   path: '/home',
+  // },
+  // {
+  //   name: '设备编辑',
+  //   path: '/edit',
+  // },
+  // {
+  //   name: '设备查看',
+  //   path: '/view',
+  // },
 ];
 
 export { headerMenuConfig, asideMenuConfig };

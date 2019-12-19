@@ -1,16 +1,16 @@
 import React from 'react';
 import Overview from './components/Overview';
-import TabChart from './components/TabChart';
-import CircleProgress from './components/CircleProgress';
+import Mapcardata from './components/Mapcardata/index_function';
+import Datacharts from './components/Datacharts';
 import TopActiveChart from './components/TopActiveChart';
 
 export default function Dashboard() {
   return (
     <div>
       <Overview />
-      <TabChart />
-      <CircleProgress />
-      <TopActiveChart />
+      <Mapcardata />
+      {/* <Datacharts /> */}
+      {/* <TopActiveChart /> */}
     </div>
   );
 }

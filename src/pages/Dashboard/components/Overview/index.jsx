@@ -26,7 +26,7 @@ export default function Overview() {
         </Col>
 
         <Col xxs="12" s="12" l="6" className={styles.textCardItem}>
-          <div className={styles.textCardSubtitle}>本周销售时间</div>
+          <div className={styles.textCardSubtitle}>本周任务时间</div>
           <div className={styles.textCardTitle}>
             <span className={styles.textCardNumber}>32</span>
             分钟
@@ -39,7 +39,7 @@ export default function Overview() {
           l="6"
           className={styles.hb}
         >
-          <div className={styles.textCardSubtitle}>本周销售量</div>
+          <div className={styles.textCardSubtitle}>本周任务量</div>
           <div className={styles.textCardTitle}>
             <span className={styles.textCardNumber}>23</span>
             个任务

@@ -15,11 +15,11 @@ import {
   Util
 } from "bizcharts";
 
-var ws = new WebSocket('ws://localhost:8080');
-ws.onopen = function () {
-  console.log('client: ws connection is open');
-  ws.send('hello');
-};
+// var ws = new WebSocket('ws://localhost:8080');
+// ws.onopen = function () {
+//   console.log('client: ws connection is open');
+//   ws.send('hello');
+// };
 
 export default class Basicanimated extends React.Component {
   render() {
@@ -49,15 +49,15 @@ export default class Basicanimated extends React.Component {
         };
       }
 
-      componentDidMount() {
-        const _this = this;
-        ws.onmessage = function (e) {
-          console.log('client: received %s', e.data);
-          _this.setState({
-            data: JSON.parse(e.data)
-          });
-        };
-      }
+      // componentDidMount() {
+      //   const _this = this;
+      //   ws.onmessage = function (e) {
+      //     console.log('client: received %s', e.data);
+      //     _this.setState({
+      //       data: JSON.parse(e.data)
+      //     });
+      //   };
+      // }
 
       render() {
         console.log(data);

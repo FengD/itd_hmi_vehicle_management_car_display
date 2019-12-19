@@ -1,6 +1,40 @@
+// export const userProfile = {
+//   // baseURL: '10.10.51.152',
+//   url: '/api/profile',
+//   method: 'GET',
+//   token: localStorage.getItem('token'),
+// };
+
+// export const userLogout = {
+//   url: '/api/logout',
+//   method: 'POST',
+// };
+
+// export const userLogin = {
+//   url: '/api/login',
+//   method: 'POST',
+// };
+
+// export const userRegister = {
+//   url: '/api/register',
+//   method: 'POST',
+// };
+
+// export const menu = {
+//   url: '/api/menu',
+//   method: 'GET',
+// };
+
+// export const carData = {
+//   // baseURL: '10.10.51.152',
+//   url: '/api/cardata',
+//   method: 'GET',
+//   token: localStorage.getItem('token'),
+// };
+
 
 export const userProfile = {
-  // baseURL: '10.10.51.40',
+  // baseURL: '10.10.51.152',
   url: '/api/profile',
   method: 'GET',
   token: localStorage.getItem('token'),
@@ -11,8 +45,9 @@ export const userLogout = {
   method: 'POST',
 };
 
-export const userLogin = {
-  url: '/api/login',
+export const login = {
+  baseURL: 'http://10.10.51.152:9999',
+  url: '/car/login',
   method: 'POST',
 };
 
@@ -27,8 +62,28 @@ export const menu = {
 };
 
 export const carData = {
-  // baseURL: '10.10.51.40',
-  url: '/api/cardata',
+  baseURL: 'http://10.10.51.152:9999',
+  url: '/car/cardata',
   method: 'GET',
+  carid: localStorage.getItem('carid'),
+  token: localStorage.getItem('token'),
+};
+
+export const routeName = {
+  baseURL: 'http://10.10.51.152:9999',
+  url: '/route/all',
+  method: 'POST',
+  // add car id
+  carid: localStorage.getItem('carid'),
+  token: localStorage.getItem('token'),
+};
+
+export const routeInfo = {
+  baseURL: 'http://10.10.51.152:9999',
+  url: '/route/select',
+  method: 'POST',
+  // add car id route id
+  carid: localStorage.getItem('carid'),
+  routeid: localStorage.getItem('routeid'),
   token: localStorage.getItem('token'),
 };

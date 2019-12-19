@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import FoundationSymbol from '@icedesign/foundation-symbol';
 import { Input, Checkbox, Grid, Form, Message } from '@alifd/next';
 import { useRequest } from '@/utils/request';
-import { userLogin } from '@/config/dataSource';
+import { login } from '@/config/dataSource';
 import styles from './index.module.scss';
 
 const Icon = FoundationSymbol;
@@ -12,11 +12,13 @@ const FormItem = Form.Item;
 
 function UserLogin(props) {
   var login_res;
-  const { loading, request } = useRequest(userLogin);
-  console.log("loading",loading,'/n',"request",request)
+  const { loading, request } = useRequest(login);
+  // console.log("loading",loading,'/n',"request",request)
   const [value, setValue] = useState({
-    username: '',
-    password: '',
+    // username: '',
+    // password: '',
+    name: '',
+    pwd: '',
     checkbox: false,
   });
 
@@ -29,6 +31,7 @@ function UserLogin(props) {
       console.log('errors', errors);
       return;
     }
+    // console.log("values",values);
     handleLogin(values);
   }
 
@@ -38,7 +41,8 @@ function UserLogin(props) {
         data: params,
       });
       console.log('login_res',login_res);
-      localStorage.setItem('token', login_res.token)
+      localStorage.setItem('token', login_res.data.token);
+      localStorage.setItem('carid', login_res.data.carid);
       Message.success('登录成功');
       props.history.push('/dashboard');
     } catch (err) {
@@ -55,7 +59,7 @@ function UserLogin(props) {
               // innerBefore={
               //   <Icon type="person" size="small" className={styles.inputIcon} />
               // }
-              name="username"
+              name="name"
               maxLength={20}
               placeholder="用户名"
             />
@@ -65,7 +69,7 @@ function UserLogin(props) {
               // innerBefore={
               //   <Icon type="lock" size="small" className={styles.inputIcon} />
               // }
-              name="password"
+              name="pwd"
               htmlType="password"
               placeholder="密码"
             />
@@ -85,12 +89,12 @@ function UserLogin(props) {
             >
               {loading ? '登录中...' : '登 录'}
             </Form.Submit>
-            <p className={styles.account}>
+            {/* <p className={styles.account}>
               <span className={styles.tipsText} style={{ marginRight: '20px' }}>
                 管理员登录：admin/admin
               </span>
               <span className={styles.tipsText}>用户登录：user/user</span>
-            </p>
+            </p> */}
           </Row>
 
           <Row className="tips">
