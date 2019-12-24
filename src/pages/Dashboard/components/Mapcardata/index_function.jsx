@@ -126,27 +126,44 @@ export default function Mapcardata() {
   //   });
   // };
 
+  function startDrive() {
+    console.log("启动智能驾驶");
+  }
+
   return (
-    <Row gutter="20">
-      <Col l="4">
-        <IceContainer className={styles.card}>
-          {routeState.map((name) =>
-            (<div onClick={() => getRouteJson(name[0])}
-              key={Math.random()}>
-              <RouteButton name={name}></RouteButton>
-            </div>)
-          )}
-        </IceContainer>
-      </Col>
-      <Col l="14">
-        <IceContainer className={styles.card}>
-          {/* <Mymap location={mapState} /> */}
-          <Mymap location={bindState} />
-        </IceContainer>
-      </Col>
-      <Col l="6">
-        <Carinfo carinfo={carState}></Carinfo>
-      </Col>
-    </Row>
+    <div>
+      <Row gutter="20">
+        <Col l="4">
+          <IceContainer className={styles.card}>
+            {routeState.map((name) =>
+              (<div onClick={() => getRouteJson(name[0])}
+                key={Math.random()}>
+                <RouteButton name={name}></RouteButton>
+              </div>)
+            )}
+          </IceContainer>
+        </Col>
+        <Col l="14">
+          <IceContainer className={styles.card}>
+            {/* <Mymap location={mapState} /> */}
+            <Mymap location={bindState} />
+          </IceContainer>
+        </Col>
+        <Col l="6">
+          <Carinfo carinfo={carState}></Carinfo>
+        </Col>
+      </Row>
+      <Row gutter="10">
+        <Col l="3">
+          <Button onClick={()=>startDrive()}>启动智能驾驶</Button>
+        </Col>
+        <Col l="3">
+          <Button>缓停开关</Button>
+        </Col>
+        <Col l="3">
+          <Button>急停开关</Button>
+        </Col>
+      </Row>
+    </div>
   );
 }
