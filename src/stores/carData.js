@@ -12,8 +12,13 @@ export default {
     },
 
     async fetchCarData() {
-        const { data } = await request(carData);
-        const { carid, name, department, longitude, latitude, speed } = data.data;
-        this.carinfo = { carid, name, department, longitude, latitude, speed };
+        try {
+            const { data } = await request(carData);
+            const { carid, name, department, longitude, latitude, speed } = data.data;
+            this.carinfo = { carid, name, department, longitude, latitude, speed };
+        } catch (err) {
+            console.log("fetchCarDataErr", err);
+        }
+
     },
 };

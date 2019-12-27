@@ -33,16 +33,19 @@
 // };
 
 
-export const userProfile = {
-  // baseURL: '10.10.51.152',
-  url: '/api/profile',
+export const carProfile = {
+  baseURL: 'http://10.10.51.152:9999',
+  url: '/car/profile',
   method: 'GET',
   token: localStorage.getItem('token'),
 };
 
-export const userLogout = {
-  url: '/api/logout',
+export const logout = {
+  baseURL: 'http://10.10.51.152:9999',
+  url: '/car/logout',
   method: 'POST',
+  carid: localStorage.getItem('carid'),
+  token: localStorage.getItem('token'),
 };
 
 export const login = {
@@ -51,8 +54,9 @@ export const login = {
   method: 'POST',
 };
 
-export const userRegister = {
-  url: '/api/register',
+export const register = {
+  baseURL: 'http://10.10.51.152:9999',
+  url: '/car/register',
   method: 'POST',
 };
 

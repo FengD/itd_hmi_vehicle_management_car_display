@@ -7,8 +7,12 @@ export default {
     },
 
     async fetchRouteData() {
-        const { data } = await request(routeName);
-        const { name } = data.data;
-        this.routename = { name };
+        try {
+            const { data } = await request(routeName);
+            const { name } = data.data;
+            this.routename = { name };
+        } catch (err) {
+            console.log("fetchRouteDataErr", err);
+        }
     },
 };

@@ -9,7 +9,12 @@ import {
 import IceIcon from '@icedesign/foundation-symbol';
 import styles from './index.module.scss';
 
+import { useRequest } from '@/utils/request';
+import { register } from '@/config/dataSource';
+import { async } from 'q';
+
 function UserRegister(props) {
+  const { loading, request } = useRequest(register);
   const [formValue, setFormValue] = useState({
     name: '',
     email: '',
@@ -51,10 +56,26 @@ function UserRegister(props) {
         return;
       }
       console.log(values);
-      Message.success('注册成功');
-      props.history.push('/user/login');
+      // Message.success('注册成功');
+      // props.history.push('/user/login');
+      handleRegister(values);
     });
   };
+
+  async function handleRegister(params) {
+    try {
+      await request({
+        data: params,
+      });
+      console.log('login_res', login_res);
+      Message.success('注册成功');
+      props.history.push('/user/login');
+    } catch (err) {
+      console.error("handleRegisterErr", err);
+    }
+  }
+
+
 
   return (
     <div className={styles.container}>

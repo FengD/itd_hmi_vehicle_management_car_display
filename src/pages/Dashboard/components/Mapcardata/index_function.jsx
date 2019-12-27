@@ -45,59 +45,76 @@ export default function Mapcardata() {
     "json": jsonState,
   }
   const [bindState, setBindState] = useState(initialBindState);
-  console.log("bindStatefirst", bindState);
   //route json get
   const routeInfo = stores.useStore('routeInfo');
   const { routejson, fetchJsonData } = routeInfo;
-  function getRouteJson(routeid) {
+  async function getRouteJson(routeid) {
     localStorage.setItem("routeid", routeid);
     console.log("getCityJson", routeid);
-    // fetchJsonData().then(setJsonState({
-    //   jsonState: routejson
-    // }))
-    // setBindState({
-    //   json:routejson
-    // })
-    // setBindState({
-    //   json: [
-    //     { latitude: 39.9789986896, longitude: 116.3534545898 },
-    //     { latitude: 39.9790356854, longitude: 116.3521778584 },
-    //     { latitude: 39.9784437501, longitude: 116.3522046804 }]
-    // })
-    let btnList = Object.assign(bindState, {
-      "json": [{ latitude: 39.9784437501, longitude: 116.3522046804 },
-      { latitude: 39.9784807462, longitude: 116.3534921408 },
-      { latitude: 39.9790356854, longitude: 116.3521778584 },
-      { latitude: 39.9784437501, longitude: 116.3522046804 }],
+    try {
+      await fetchJsonData();
+      let btnList = Object.assign(bindState, {
+        "json": routejson,
+      })
+      setBindState(
+        btnList
+      )
+    } catch (err) {
+      console.log("getRouteJsonErr", err);
     }
-    )
-    setBindState(
-      btnList
-    )
-    // setBindState(
-    //  Object.assign(bindState, {
-    //   "json": [
-    //     { latitude: 39.9790356854, longitude: 116.3521778584 },
-    //     { latitude: 39.9784437501, longitude: 116.3522046804 },
-    //     { latitude: 39.9789986896, longitude: 116.3534545898 }
-    //   ],
-    //   "map": [116, 39.978694],
-    // })
-    // );
-    // setBindState(
-    //   { bindState: { "map": [116, 39.978694] } }
+    // fetchJsonData().then(
+    //   btnList = Object.assign(bindState, routejson)
     // )
-    console.log("bindStatechange", bindState);
+    // setBindState(
+    //   btnList
+    // )
 
-    setCarState({
-      driveStatus: 1, obstacleAvoid: 1, locationStatus: 1, GPSStatus: 1,
-      actuatorFailure: 1, sensorFailure: 1
-    });
-    console.log('carState', carState);
+
+    // let btnList = Object.assign(bindState, {
+    //   "json": [{ latitude: 39.9784437501, longitude: 116.3522046804 },
+    //   { latitude: 39.9784807462, longitude: 116.3534921408 },
+    //   { latitude: 39.9790356854, longitude: 116.3521778584 },
+    //   { latitude: 39.9784437501, longitude: 116.3522046804 }],
+    // }
+    // )
+    // setBindState(
+    //   btnList
+    // )
+
+    //merge1
+    // setBindState({
+    //   bindState: Object.assign({}, bindState, {
+    //     "json": [
+    //       { latitude: 39.9784437501, longitude: 116.3522046804 },
+    //       { latitude: 39.9784807462, longitude: 116.3534921408 },
+    //       { latitude: 39.9790356854, longitude: 116.3521778584 },
+    //       { latitude: 39.9784437501, longitude: 116.3522046804 }
+    //     ]
+    //   })
+    // }
+    // );
+
+    //merge2
+    // setBindState(
+    //   Object.assign({}, bindState, {
+    //     "json": [
+    //       { latitude: 39.9784437501, longitude: 116.3522046804 },
+    //       { latitude: 39.9784807462, longitude: 116.3534921408 },
+    //       { latitude: 39.9790356854, longitude: 116.3521778584 },
+    //       { latitude: 39.9784437501, longitude: 116.3522046804 }
+    //     ]
+    //   })
+    // );
+
+    //test
+    // setCarState({
+    //   driveStatus: 1, obstacleAvoid: 1, locationStatus: 1, GPSStatus: 1,
+    //   actuatorFailure: 1, sensorFailure: 1
+    // });
+    // console.log('carState', carState);
   }
 
   //map info and car info websocket to transport frequently changing data
-  // const [mapState, setMapState] = useState(initialMapState);
   //car info
   var initialCarState = {
     driveStatus: 0, obstacleAvoid: 0, locationStatus: 0, GPSStatus: 0,
@@ -114,13 +131,16 @@ export default function Mapcardata() {
   // //only one onmessage . have two parts 1.location 2.carstatus
   // ws.onmessage = function (e) {
   //   console.log('client: received %s', e.data);
-  //   // return e.data;
-  //   setBindState({
-  //     map:JSON.parse(e.data.location)
+  //   let btnList = Object.assign(bindState, {
+  //     "map": JSON.parse(e.data.location),
   //   })
-  //   // setMapState({
-  //   //   mapState: JSON.parse(e.data.location)
-  //   // });
+  //   setBindState(
+  //     btnList
+  //   )
+  //   // setBindState({
+  //   //   map:JSON.parse(e.data.location)
+  //   // })
+    
   //   setCarState({
   //     carState: JSON.parse(e.data.carinfo)
   //   });
@@ -155,7 +175,7 @@ export default function Mapcardata() {
       </Row>
       <Row gutter="10">
         <Col l="3">
-          <Button onClick={()=>startDrive()}>启动智能驾驶</Button>
+          <Button onClick={() => startDrive()}>启动智能驾驶</Button>
         </Col>
         <Col l="3">
           <Button>缓停开关</Button>

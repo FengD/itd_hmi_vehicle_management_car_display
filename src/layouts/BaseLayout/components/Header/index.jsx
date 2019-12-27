@@ -8,15 +8,14 @@ import styles from './index.module.scss';
 
 import stores from '@/stores/index';
 import { useRequest } from '@/utils/request';
-import { userLogout } from '@/config/dataSource';
+import { logout } from '@/config/dataSource';
 
 import FoundationSymbol from '@icedesign/foundation-symbol';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
 function Header(props) {
-  const { request } = useRequest(userLogout);
-  const userProfile = stores.useStore('userProfile');
-
+  const { request } = useRequest(logout);
+  
   function getLocaleKey(item) {
     return `app.header.${item.name}`;
   }
@@ -29,19 +28,16 @@ function Header(props) {
     try {
       await request();
       Message.success('已登出');
+      localStorage.removeItem('login_status');
       props.history.push('/user/login');
     } catch (err) {
       console.error(err);
     }
   }
 
-  // const {
-  //   isMobile,
-  //   intl: { formatMessage },
-  // } = props;
-
-  const { userinfo, fetchData } = userProfile;
-  const { name, department, avatar } = userinfo;
+  const carProfile = stores.useStore('carProfile');
+  const { carinfo, fetchData } = carProfile;
+  const { name, department, avatar } = carinfo;
   // const { toggle } = expandAside;
 
   useEffect(() => {
@@ -81,7 +77,7 @@ function Header(props) {
         className={styles.headerBalloon}
         style={{ width: '80px' }}
       >
-        <div className={styles.personalMenu}>
+        <div className={styles.personalMenu} onClick={handleLogout}>
           <Link to="/user/login">退出</Link>
         </div>
       </Balloon>

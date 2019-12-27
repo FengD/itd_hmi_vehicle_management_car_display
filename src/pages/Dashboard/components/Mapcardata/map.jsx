@@ -51,7 +51,7 @@ export default class Mymap extends React.Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
+    // console.log('componentDidMount');
     // PubSub.subscribe('send-data', (msg, data) => {
     //   if(data != null)
     //   {
@@ -67,6 +67,7 @@ export default class Mymap extends React.Component {
   }
 
   componentWillReceiveProps() {
+    console.log("this.props.location",this.props.location);
     this.setState(
       {
         position: { longitude: this.props.location["map"][0], latitude: this.props.location["map"][1] },
@@ -75,14 +76,13 @@ export default class Mymap extends React.Component {
     )
   }
 
-  componentWillUnmount() {
-    PubSub.unsubscribe('send-data');
-  }
+  // componentWillUnmount() {
+  //   PubSub.unsubscribe('send-data');
+  // }
 
   render() {
-    console.log("this.props.location",this.props.location);
     return <div>
-      <div style={{ width: '100%', height: 400 }}>
+      <div style={{ width: '100%', height: window.innerHeight*0.7 }}>
         <Map plugins={this.mapPlugins} center={this.state.position} zoom={20}>
           <Polyline
             path={this.state.path}

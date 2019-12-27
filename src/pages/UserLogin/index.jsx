@@ -13,7 +13,6 @@ const FormItem = Form.Item;
 function UserLogin(props) {
   var login_res;
   const { loading, request } = useRequest(login);
-  // console.log("loading",loading,'/n',"request",request)
   const [value, setValue] = useState({
     // username: '',
     // password: '',
@@ -40,13 +39,14 @@ function UserLogin(props) {
       login_res = await request({
         data: params,
       });
-      console.log('login_res',login_res);
+      console.log('login_res', login_res);
       localStorage.setItem('token', login_res.data.token);
       localStorage.setItem('carid', login_res.data.carid);
+      localStorage.setItem('login_status', login_res.data.login_status);
       Message.success('登录成功');
       props.history.push('/dashboard');
     } catch (err) {
-      console.error(err);
+      console.error("handleLoginErr", err);
     }
   }
 

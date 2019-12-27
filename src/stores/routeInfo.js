@@ -7,8 +7,12 @@ export default {
     },
 
     async fetchJsonData() {
-        const { data } = await request(routeName);
-        const { info } = data.data;
-        this.routeinfo = { info };
+        try {
+            const { data } = await request(routeInfo);
+            const { info } = data.data;
+            this.routeinfo = { info };
+        } catch (err) {
+            console.log("fetchJsonDataErr", err);
+        }
     },
 };
