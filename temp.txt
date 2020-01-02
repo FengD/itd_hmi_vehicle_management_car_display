@@ -117,6 +117,49 @@ export default withRouter(Header);
       </Col>
 
 
+//getRouteJson
+// let btnList = Object.assign(bindState, {
+    //   "json": [{ latitude: 39.9784437501, longitude: 116.3522046804 },
+    //   { latitude: 39.9784807462, longitude: 116.3534921408 },
+    //   { latitude: 39.9790356854, longitude: 116.3521778584 },
+    //   { latitude: 39.9784437501, longitude: 116.3522046804 }],
+    // }
+    // )
+    // setBindState(
+    //   btnList
+    // )
+
+    //merge1
+    // setBindState({
+    //   bindState: Object.assign({}, bindState, {
+    //     "json": [
+    //       { latitude: 39.9784437501, longitude: 116.3522046804 },
+    //       { latitude: 39.9784807462, longitude: 116.3534921408 },
+    //       { latitude: 39.9790356854, longitude: 116.3521778584 },
+    //       { latitude: 39.9784437501, longitude: 116.3522046804 }
+    //     ]
+    //   })
+    // }
+    // );
+
+    //merge2
+    // setBindState(
+    //   Object.assign({}, bindState, {
+    //     "json": [
+    //       { latitude: 39.9784437501, longitude: 116.3522046804 },
+    //       { latitude: 39.9784807462, longitude: 116.3534921408 },
+    //       { latitude: 39.9790356854, longitude: 116.3521778584 },
+    //       { latitude: 39.9784437501, longitude: 116.3522046804 }
+    //     ]
+    //   })
+    // );
+
+    //test
+    // setCarState({
+    //   driveStatus: 1, obstacleAvoid: 1, locationStatus: 1, GPSStatus: 1,
+    //   actuatorFailure: 1, sensorFailure: 1
+    // });
+    // console.log('carState', carState);
 
 
 

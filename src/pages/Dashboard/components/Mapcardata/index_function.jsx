@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import IceContainer from '@icedesign/container';
-import { Grid, Button } from '@alifd/next';
+import { Grid, Button, Message } from '@alifd/next';
 import Carinfo from '../Carinfos';
 import styles from './index.module.scss';
 import Mymap from './map';
@@ -8,9 +8,8 @@ import RouteButton from './routeButton';
 
 import stores from '@/stores/index';
 import { useRequest } from '@/utils/request';
-import { carData } from '@/config/dataSource';
-import { routeName } from '@/config/dataSource';
-import { routeInfo } from '@/config/dataSource';
+import { carData, routeName, routeInfo, start, slowStop, emergencyStop } from '@/config/dataSource';
+import { serverIP } from '@/config/settings.js';
 
 const { Row, Col } = Grid;
 
@@ -36,18 +35,22 @@ export default function Mapcardata() {
   { latitude: 39.9789986896, longitude: 116.3534545898 },
   { latitude: 39.9790356854, longitude: 116.3521778584 },
   { latitude: 39.9784437501, longitude: 116.3522046804 }];
+
   //mapstate initial
   var mapState = [116.353015, 39.978694];
+
   //bindstate to map component
-  var initialBindState = [mapState, jsonState];
+  // var initialBindState = [mapState, jsonState];
   var initialBindState = {
     "map": mapState,
     "json": jsonState,
   }
   const [bindState, setBindState] = useState(initialBindState);
+
   //route json get
   const routeInfo = stores.useStore('routeInfo');
   const { routejson, fetchJsonData } = routeInfo;
+
   async function getRouteJson(routeid) {
     localStorage.setItem("routeid", routeid);
     console.log("getCityJson", routeid);
@@ -60,6 +63,7 @@ export default function Mapcardata() {
         btnList
       )
     } catch (err) {
+      Message.error("路线json获取失败");
       console.log("getRouteJsonErr", err);
     }
     // fetchJsonData().then(
@@ -68,50 +72,6 @@ export default function Mapcardata() {
     // setBindState(
     //   btnList
     // )
-
-
-    // let btnList = Object.assign(bindState, {
-    //   "json": [{ latitude: 39.9784437501, longitude: 116.3522046804 },
-    //   { latitude: 39.9784807462, longitude: 116.3534921408 },
-    //   { latitude: 39.9790356854, longitude: 116.3521778584 },
-    //   { latitude: 39.9784437501, longitude: 116.3522046804 }],
-    // }
-    // )
-    // setBindState(
-    //   btnList
-    // )
-
-    //merge1
-    // setBindState({
-    //   bindState: Object.assign({}, bindState, {
-    //     "json": [
-    //       { latitude: 39.9784437501, longitude: 116.3522046804 },
-    //       { latitude: 39.9784807462, longitude: 116.3534921408 },
-    //       { latitude: 39.9790356854, longitude: 116.3521778584 },
-    //       { latitude: 39.9784437501, longitude: 116.3522046804 }
-    //     ]
-    //   })
-    // }
-    // );
-
-    //merge2
-    // setBindState(
-    //   Object.assign({}, bindState, {
-    //     "json": [
-    //       { latitude: 39.9784437501, longitude: 116.3522046804 },
-    //       { latitude: 39.9784807462, longitude: 116.3534921408 },
-    //       { latitude: 39.9790356854, longitude: 116.3521778584 },
-    //       { latitude: 39.9784437501, longitude: 116.3522046804 }
-    //     ]
-    //   })
-    // );
-
-    //test
-    // setCarState({
-    //   driveStatus: 1, obstacleAvoid: 1, locationStatus: 1, GPSStatus: 1,
-    //   actuatorFailure: 1, sensorFailure: 1
-    // });
-    // console.log('carState', carState);
   }
 
   //map info and car info websocket to transport frequently changing data
@@ -122,32 +82,63 @@ export default function Mapcardata() {
   };
   const [carState, setCarState] = useState(initialCarState);
 
-  // var ws = new WebSocket('ws://10.10.51.152:9999');
-  // ws.onopen = function () {
-  //   // console.log('client: ws connection is open');
-  //   //send token 
-  //   ws.send(localStorage.getItem("token"));
-  // };
-  // //only one onmessage . have two parts 1.location 2.carstatus
-  // ws.onmessage = function (e) {
-  //   console.log('client: received %s', e.data);
-  //   let btnList = Object.assign(bindState, {
-  //     "map": JSON.parse(e.data.location),
-  //   })
-  //   setBindState(
-  //     btnList
-  //   )
-  //   // setBindState({
-  //   //   map:JSON.parse(e.data.location)
-  //   // })
-    
-  //   setCarState({
-  //     carState: JSON.parse(e.data.carinfo)
-  //   });
-  // };
+  // var ws = new WebSocket('ws://serverIP/test?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIiwiZXhwIjoxNTc3NzQyMjgwLCJpYXQiOjE1Nzc2OTkwODB9._BG6w-TmJMD0A6UywK9FgDdyIXdGnYT8aQCnlZniYkI');
+  var ws = new WebSocket('ws://' + serverIP + '/car/ws?token=' + localStorage.getItem("token"));
+  ws.onopen = function () {
+    ws.send(localStorage.getItem("token"));
+  };
 
-  function startDrive() {
-    console.log("启动智能驾驶");
+  //only one onmessage . have two parts 1.location 2.carstatus
+  ws.onmessage = function (e) {
+    console.log('client: received %s', e.data);
+    let btnList = Object.assign(bindState, {
+      "map": JSON.parse(e.data.location),
+    })
+    setBindState(
+      btnList
+    )
+    // setBindState({
+    //   map:JSON.parse(e.data.location)
+    // })
+
+    setCarState({
+      carState: JSON.parse(e.data.carinfo)
+    });
+  };
+
+  //drive action
+  const { driveRequest } = useRequest(start);
+  const { slowRequest } = useRequest(slowStop);
+  const { emegencyRequest } = useRequest(emergencyStop);
+
+  async function start() {
+    try {
+      await driveRequest();
+      Message.success('开始智能驾驶');
+    } catch (err) {
+      Message.error('启动失败');
+      console.error("driveRequestErr", err);
+    }
+  }
+
+  async function slowStop() {
+    try {
+      await slowRequest();
+      Message.success('开始缓停');
+    } catch (err) {
+      Message.error('缓停失败');
+      console.error("slowRequestErr", err);
+    }
+  }
+
+  async function emergencyStop() {
+    try {
+      await emegencyRequest();
+      Message.success('开始急停');
+    } catch (err) {
+      Message.error('急停失败');
+      console.error("emegencyRequestErr", err);
+    }
   }
 
   return (
@@ -175,13 +166,13 @@ export default function Mapcardata() {
       </Row>
       <Row gutter="10">
         <Col l="3">
-          <Button onClick={() => startDrive()}>启动智能驾驶</Button>
+          <Button onClick={() => start()}>启动智能驾驶</Button>
         </Col>
         <Col l="3">
-          <Button>缓停开关</Button>
+          <Button onClick={() => slowStop()}>缓停开关</Button>
         </Col>
         <Col l="3">
-          <Button>急停开关</Button>
+          <Button onClick={() => emergencyStop()}>急停开关</Button>
         </Col>
       </Row>
     </div>

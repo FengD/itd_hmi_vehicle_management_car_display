@@ -71,6 +71,7 @@ function UserRegister(props) {
       Message.success('注册成功');
       props.history.push('/user/login');
     } catch (err) {
+      Message.err('注册失败');
       console.error("handleRegisterErr", err);
     }
   }

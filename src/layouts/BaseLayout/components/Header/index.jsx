@@ -15,7 +15,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 
 function Header(props) {
   const { request } = useRequest(logout);
-  
+
   function getLocaleKey(item) {
     return `app.header.${item.name}`;
   }
@@ -31,7 +31,8 @@ function Header(props) {
       localStorage.removeItem('login_status');
       props.history.push('/user/login');
     } catch (err) {
-      console.error(err);
+      Message.error('登出失败');
+      console.error("handleLogoutErr", err);
     }
   }
 

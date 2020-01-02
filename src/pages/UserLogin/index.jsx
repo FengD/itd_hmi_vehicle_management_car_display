@@ -41,11 +41,12 @@ function UserLogin(props) {
       });
       console.log('login_res', login_res);
       localStorage.setItem('token', login_res.data.token);
-      localStorage.setItem('carid', login_res.data.carid);
-      localStorage.setItem('login_status', login_res.data.login_status);
+      localStorage.setItem('carid', login_res.data.car.id);
+      localStorage.setItem('login_status', login_res.data.status);
       Message.success('登录成功');
       props.history.push('/dashboard');
     } catch (err) {
+      Message.error('登录失败');
       console.error("handleLoginErr", err);
     }
   }
