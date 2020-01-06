@@ -2,15 +2,11 @@ import { request } from '@/utils/request';
 import { routeName } from '@/config/dataSource';
 
 export default {
-    routename: {
-        name: [],
-    },
-
+    routeNameID: [],
     async fetchRouteData() {
         try {
             const { data } = await request(routeName);
-            const { name } = data.data;
-            this.routename = { name };
+            this.routeNameID = { data };
         } catch (err) {
             console.log("fetchRouteDataErr", err);
         }

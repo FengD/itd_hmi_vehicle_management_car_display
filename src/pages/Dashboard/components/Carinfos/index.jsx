@@ -2,35 +2,10 @@ import React, { useEffect } from 'react';
 import IceContainer from '@icedesign/container';
 import styles from './index.module.scss';
 
-import stores from '@/stores';
-import { useRequest } from '@/utils/request';
-import { carData } from '@/config/dataSource';
-
-import PubSub from 'pubsub-js';
-import { Switch } from '@alifd/next';
-
-import ReactDom from 'react'
-
 export default class Carinfo extends React.Component {
-  // console.log("props", props.carinfo);
-  // console.log("props.carinfo.name", props.carinfo.name);
-  // const carData = stores.useStore('carData');
-  // const { carinfo, fetchData } = carData;
-  // const { carid, name, department, longitude, latitude, speed } = carinfo;
-  // var speed_status = false;
-  // console.log('carData', carinfo);
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
-  // function onChange(checked) {
-  //   console.log("checked", checked);
-  //   PubSub.publish('speed_status', checked);
-  // }
 
   render(){
     console.log("this.props.carinfo",this.props.carinfo);
-
     return (<IceContainer className={styles.container}>
       <h3 className={styles.title}>车辆情况</h3>
       <ul>

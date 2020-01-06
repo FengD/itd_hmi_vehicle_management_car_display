@@ -8,8 +8,8 @@ export default class Mymap extends React.Component {
     super(props);
     this.state = {
       visible: true,
-      position: { longitude: this.props.location["map"][0], latitude: this.props.location["map"][1] },
-      path: this.props.location["json"],
+      position: { longitude: this.props.mapdata["map"]["longitude"], latitude: this.props.mapdata["map"]["latitude"] },
+      path: this.props.mapdata["json"],
       clickable: true,
       draggable: true,
     };
@@ -67,11 +67,11 @@ export default class Mymap extends React.Component {
   }
 
   componentWillReceiveProps() {
-    console.log("this.props.location",this.props.location);
+    console.log("this.props.mapdata",this.props.mapdata);
     this.setState(
       {
-        position: { longitude: this.props.location["map"][0], latitude: this.props.location["map"][1] },
-        path: this.props.location["json"],
+        position: { longitude: this.props.mapdata["map"][0], latitude: this.props.mapdata["map"][1] },
+        path: this.props.mapdata["json"],
       },
     )
   }

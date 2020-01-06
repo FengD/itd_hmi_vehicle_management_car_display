@@ -41,7 +41,7 @@ function UserLogin(props) {
       });
       console.log('login_res', login_res);
       localStorage.setItem('token', login_res.data.token);
-      localStorage.setItem('carid', login_res.data.car.id);
+      localStorage.setItem('carid', login_res.data.car.car_id);
       localStorage.setItem('login_status', login_res.data.status);
       Message.success('登录成功');
       props.history.push('/dashboard');

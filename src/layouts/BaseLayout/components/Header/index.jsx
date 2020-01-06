@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '@icedesign/layout';
-import { Icon, Balloon, Nav } from '@alifd/next';
+import { Icon, Balloon, Nav, Message } from '@alifd/next';
 import { Link, withRouter } from 'react-router-dom';
 import { asideMenuConfig } from '@/config/menu.js';
 import Logo from '../Logo';
@@ -36,9 +36,13 @@ function Header(props) {
     }
   }
 
+  //carProfile
+  // var initialCarProfile = "260";
+  // const [carProfileState, setCarProfileState] = use
   const carProfile = stores.useStore('carProfile');
   const { carinfo, fetchData } = carProfile;
-  const { name, department, avatar } = carinfo;
+  // const { name } = carinfo["car_name"];
+  const { name } = "260";
   // const { toggle } = expandAside;
 
   useEffect(() => {

@@ -4,7 +4,7 @@ import styles from './index.module.scss';
 
 export default function Logo() {
   return (
-    <Link to="/" className={styles.logo}>
+    <Link  className={styles.logo}>
       <span className={styles.brand}>LOGO</span>
       <div className={styles.workbench}>
         设备管理

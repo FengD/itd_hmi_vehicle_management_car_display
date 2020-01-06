@@ -8,25 +8,24 @@ import RouteButton from './routeButton';
 
 import stores from '@/stores/index';
 import { useRequest } from '@/utils/request';
-import { carData, routeName, routeInfo, start, slowStop, emergencyStop } from '@/config/dataSource';
+import { carProfile, routeName, routeInfo, start, slowStop, emergencyStop } from '@/config/dataSource';
 import { serverIP } from '@/config/settings.js';
 
 const { Row, Col } = Grid;
 
 export default function Mapcardata() {
   //route info 
-  // var initialRouteState = { "1": "综合楼--设计中心", "2": "综合楼--广场", "3": "综合楼--食堂" };
-  // var initialRouteState = [{ "1": "综合楼--设计中心" }, { "2": "综合楼--广场" }, { "3": "综合楼--食堂" }];
-  // var initialRouteState = ["综合楼--设计中心", "综合楼--广场", "综合楼--食堂"];
-  var initialRouteState = [["1", "综合楼--设计中心"], ["2", "综合楼--广场"], ["3", "综合楼--食堂"]];
+  // var initialRouteState = [["1", "综合楼--设计中心"], ["2", "综合楼--广场"], ["3", "综合楼--食堂"]];
+  var initialRouteState = [{ "route_id": 1, "route_name": "1111" }, { "route_id": 2, "route_name": "2222" }, { "route_id": 3, "route_name": "3333" },]
 
   const [routeState, setRouteState] = useState(initialRouteState);
   const routeName = stores.useStore('routeName');
-  const { routeinfo, fetchRouteData } = routeName;
+  const { routeNameID, fetchRouteData } = routeName;
   // useEffect(() => {
+  //   console.log("useEffect");
   //   fetchRouteData().then(setRouteState({
-  //     routeState: routeinfo
-  //   }))
+  //     routeState: routeNameID
+  //   }));
   // }, []);
 
   //route json initial
@@ -37,7 +36,8 @@ export default function Mapcardata() {
   { latitude: 39.9784437501, longitude: 116.3522046804 }];
 
   //mapstate initial
-  var mapState = [116.353015, 39.978694];
+  // var mapState = [116.353015, 39.978694];
+  var mapState = { longitude: 116.353015, latitude: 39.978694 };
 
   //bindstate to map component
   // var initialBindState = [mapState, jsonState];
@@ -52,26 +52,21 @@ export default function Mapcardata() {
   const { routejson, fetchJsonData } = routeInfo;
 
   async function getRouteJson(routeid) {
-    localStorage.setItem("routeid", routeid);
-    console.log("getCityJson", routeid);
     try {
+      localStorage.setItem("routeid", routeid);
+      console.log("getCityJson", routeid);
       await fetchJsonData();
       let btnList = Object.assign(bindState, {
-        "json": routejson,
-      })
+        "json": routejson["route_json"],
+      });
       setBindState(
         btnList
-      )
+      );
     } catch (err) {
-      Message.error("路线json获取失败");
+      // Message.error("路线json获取失败");
       console.log("getRouteJsonErr", err);
     }
-    // fetchJsonData().then(
-    //   btnList = Object.assign(bindState, routejson)
-    // )
-    // setBindState(
-    //   btnList
-    // )
+
   }
 
   //map info and car info websocket to transport frequently changing data
@@ -82,7 +77,6 @@ export default function Mapcardata() {
   };
   const [carState, setCarState] = useState(initialCarState);
 
-  // var ws = new WebSocket('ws://serverIP/test?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIiwiZXhwIjoxNTc3NzQyMjgwLCJpYXQiOjE1Nzc2OTkwODB9._BG6w-TmJMD0A6UywK9FgDdyIXdGnYT8aQCnlZniYkI');
   var ws = new WebSocket('ws://' + serverIP + '/car/ws?token=' + localStorage.getItem("token"));
   ws.onopen = function () {
     ws.send(localStorage.getItem("token"));
@@ -91,22 +85,29 @@ export default function Mapcardata() {
   //only one onmessage . have two parts 1.location 2.carstatus
   ws.onmessage = function (e) {
     console.log('client: received %s', e.data);
-    let btnList = Object.assign(bindState, {
-      "map": JSON.parse(e.data.location),
-    })
-    setBindState(
-      btnList
-    )
-    // setBindState({
-    //   map:JSON.parse(e.data.location)
-    // })
+    
+    if (e.data["type"] == "current_position") {
+      console.log("current_position", e.data["content"]);
+      let btnList = Object.assign(bindState, {
+        "map": JSON.parse(e.data["content"]),
+      })
+      setBindState(
+        btnList
+      )
+    }
 
-    setCarState({
-      carState: JSON.parse(e.data.carinfo)
-    });
+    if (e.data["type"] == "current_status") {
+      console.log("current_status", e.data["content"]);
+      setCarState({
+        carState: JSON.parse(e.data["content"])
+      });
+    }
   };
 
   //drive action
+  var initialStartState = false;
+  const [startState, setStartState] = useState(initialStartState);
+
   const { driveRequest } = useRequest(start);
   const { slowRequest } = useRequest(slowStop);
   const { emegencyRequest } = useRequest(emergencyStop);
@@ -114,30 +115,33 @@ export default function Mapcardata() {
   async function start() {
     try {
       await driveRequest();
+      setStartState(true);
       Message.success('开始智能驾驶');
     } catch (err) {
       Message.error('启动失败');
-      console.error("driveRequestErr", err);
+      console.log("driveRequestErr", err);
     }
   }
 
   async function slowStop() {
     try {
       await slowRequest();
+      setStartState(false);
       Message.success('开始缓停');
     } catch (err) {
       Message.error('缓停失败');
-      console.error("slowRequestErr", err);
+      console.log("slowRequestErr", err);
     }
   }
 
   async function emergencyStop() {
     try {
       await emegencyRequest();
+      setStartState(false);
       Message.success('开始急停');
     } catch (err) {
       Message.error('急停失败');
-      console.error("emegencyRequestErr", err);
+      console.log("emegencyRequestErr", err);
     }
   }
 
@@ -146,10 +150,10 @@ export default function Mapcardata() {
       <Row gutter="20">
         <Col l="4">
           <IceContainer className={styles.card}>
-            {routeState.map((name) =>
-              (<div onClick={() => getRouteJson(name[0])}
+            {routeState.map((route) =>
+              (<div onClick={() => getRouteJson(route["route_id"])}
                 key={Math.random()}>
-                <RouteButton name={name}></RouteButton>
+                <RouteButton name={route["route_name"]}></RouteButton>
               </div>)
             )}
           </IceContainer>
@@ -157,7 +161,7 @@ export default function Mapcardata() {
         <Col l="14">
           <IceContainer className={styles.card}>
             {/* <Mymap location={mapState} /> */}
-            <Mymap location={bindState} />
+            <Mymap mapdata={bindState} />
           </IceContainer>
         </Col>
         <Col l="6">
@@ -166,13 +170,13 @@ export default function Mapcardata() {
       </Row>
       <Row gutter="10">
         <Col l="3">
-          <Button onClick={() => start()}>启动智能驾驶</Button>
+          <Button onClick={() => start()} disabled={startState}>启动智能驾驶</Button>
         </Col>
         <Col l="3">
-          <Button onClick={() => slowStop()}>缓停开关</Button>
+          <Button onClick={() => slowStop()} disabled={!startState}>缓停开关</Button>
         </Col>
         <Col l="3">
-          <Button onClick={() => emergencyStop()}>急停开关</Button>
+          <Button onClick={() => emergencyStop()} disabled={!startState}>急停开关</Button>
         </Col>
       </Row>
     </div>
