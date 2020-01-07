@@ -3,12 +3,137 @@
 }
 
 .card {
-  // height: 
+  //height: 320;
   padding: 0 20px !important;
+  width: 100%;
 }
 
 .mapcentre {
     padding-top: 5%;
     margin: auto;
     width: 80%;
+}
+
+.RouteContainer{
+    height: 320px;
+    padding: 0 auto !important;
+}
+
+.RouteList{
+
+  
+  padding: 100px !important;
+  
+}
+
+.BottomBtnContainer{
+  padding:0 auto;
+}
+.btnSecContainer{
+  width: auto;
+  padding:0 auto;
+  margin-left: 6%;
+}
+
+.BottomBtn1{
+  display: inline-block;
+  width: 200px;
+  height: 40px !important;
+  color: #fff !important;
+  background-color: #204d74 !important;
+  border-color: #122b40 !important;
+  margin: 15px !important;
+  font-weight: 400 !important;
+  line-height: 1.42857143 !important;
+  border: 1px solid transparent !important;
+  border-radius: 4px !important;
+}
+.BottomBtn2{
+  display: inline-block;
+  width: 200px;
+  height: 40px !important;
+  color: #fff !important;
+  background-color: #d58512 !important;
+  border-color: #985f0d !important;
+  margin: 15px !important;
+  font-weight: 400 !important;
+  line-height: 1.42857143 !important;
+  border: 1px solid transparent !important;
+  border-radius: 4px !important;
+}
+.BottomBtn3{
+  display: inline-block;
+  width: 200px;
+  height: 40px !important;
+  color: #fff !important;
+  background-color: #d9534f !important;
+  border-color: #d43f3a !important;
+  margin: 15px !important ;
+  font-weight: 400 !important;
+  line-height: 1.42857143 !important;
+  border: 1px solid transparent !important;
+  border-radius: 4px !important;
+}
+.leftList{
+  width: 100%;
+}
+.title {
+  margin: 0;
+  padding-bottom: 3px;
+  font-size: 20px;
+  padding-bottom: 10px;
+  // color: red;BottomBtnContainer
+  border-bottom: 1px solid #dcdee3;
+}
+ .leftBtn{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+// 兼容手机设备居中
+  
+  @media only screen and(min-width:375px)and(max-width:667px){
+  // iphoneX 6 7
+  
+    .BottomBtn1,.BottomBtn2,.BottomBtn3{
+      margin-left: 21% !important;
+    }
+  
+  }
+  
+  
+  @media only screen and(min-width:414px)and(max-width:736px){
+  
+  
+    .BottomBtn1,.BottomBtn2,.BottomBtn3{
+      margin-left: 23% !important;
+    }
+  }
+  @media only screen  and (min-width : 768px)  and (max-width:1024px)
+  {//iPad
+    .BottomBtn1,.BottomBtn2,.BottomBtn3{
+      width: 150px !important;
+    }
+    .leftBtnItem{
+      width: 130px !important;
+    }
+  }
+  .leftBtnItem{
+    display: inline-block;
+    opacity: 0.6;
+    height: 40px !important;
+    color: #fff !important;
+    background-color: #204d74 !important;
+    border-color: #122b40 !important;
+    margin-top: 15px !important;
+    font-weight: 400 !important;
+    line-height: 1.42857143 !important;
+    border: 1px solid transparent !important;
+    border-radius: 4px !important;
+  }
+.leftBtnItem:hover{
+  opacity: 1;
+}
+//选中路线按钮后添加的样式 待定
+.BtnActive{
+  opacity: 1;
 }

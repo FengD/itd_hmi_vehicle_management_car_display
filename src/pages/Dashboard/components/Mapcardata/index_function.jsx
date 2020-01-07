@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import IceContainer from '@icedesign/container';
-import { Grid, Button, Message } from '@alifd/next';
+import { Grid, Button, Message,Drawer} from '@alifd/next';
 import Carinfo from '../Carinfos';
 import styles from './index.module.scss';
 import Mymap from './map';
 import RouteButton from './routeButton';
+
 
 import stores from '@/stores/index';
 import { useRequest } from '@/utils/request';
@@ -21,6 +22,7 @@ export default function Mapcardata() {
   var initialRouteState = [["1", "综合楼--设计中心"], ["2", "综合楼--广场"], ["3", "综合楼--食堂"]];
 
   const [routeState, setRouteState] = useState(initialRouteState);
+
   const routeName = stores.useStore('routeName');
   const { routeinfo, fetchRouteData } = routeName;
   // useEffect(() => {
@@ -142,39 +144,66 @@ export default function Mapcardata() {
   }
 
   return (
-    <div>
-      <Row gutter="20">
-        <Col l="4">
-          <IceContainer className={styles.card}>
-            {routeState.map((name) =>
-              (<div onClick={() => getRouteJson(name[0])}
-                key={Math.random()}>
-                <RouteButton name={name}></RouteButton>
-              </div>)
-            )}
-          </IceContainer>
+    <div role="grid">
+      <Row gutter="20" wrap="true">
+        <Col l="4" s="6" hidden={['xs', 'xxs']}>
+          <div role="grid">
+            <Row>
+                <IceContainer className={styles.RouteContainer , styles.leftList}>
+                <h3 className={styles.title}>车辆路线</h3>
+                  {routeState.map( (name) =>
+                    (
+                      <RouteButton name={name} onClick={() => getRouteJson(name[0])}
+                      key={Math.random()} className={styles.RouteList}></RouteButton>
+                    )
+                  )}
+                </IceContainer>
+           </Row>
+           {/* 右侧车辆情况内容 */}
+            <Row hidden={['xl','l','xs', 'xxs']}>
+              <Carinfo  carinfo={carState} className={styles.leftList}></Carinfo>
+            </Row>
+          </div>
         </Col>
-        <Col l="14">
-          <IceContainer className={styles.card}>
-            {/* <Mymap location={mapState} /> */}
-            <Mymap location={bindState} />
-          </IceContainer>
+        <Col l="16" s="18">
+        <div role="grid">
+          <Row>
+            <IceContainer className={styles.card}>
+              {/* <Mymap location={mapState} /> */}
+              <Mymap location={bindState} />
+            </IceContainer>
+          </Row>
+          {/* 底部按钮响应式显示 */}
+          <Row hidden={['l','xl']} wrap="true">
+            <img src="start.png" alt=""/>
+            <Button onClick={() => start()} className={styles.BottomBtn1}>启动智能驾驶</Button>
+          
+            <Button onClick={() => slowStop()} className={styles.BottomBtn2}>缓停开关</Button>
+          
+            <Button onClick={() => emergencyStop()} className={styles.BottomBtn3}>急停开关</Button>
+          </Row>
+          </div>
         </Col>
-        <Col l="6">
+        <Col l="4"  hidden={['m','s','xs', 'xxs']}>
           <Carinfo carinfo={carState}></Carinfo>
         </Col>
       </Row>
-      <Row gutter="10">
-        <Col l="3">
-          <Button onClick={() => start()}>启动智能驾驶</Button>
-        </Col>
-        <Col l="3">
-          <Button onClick={() => slowStop()}>缓停开关</Button>
-        </Col>
-        <Col l="3">
-          <Button onClick={() => emergencyStop()}>急停开关</Button>
-        </Col>
-      </Row>
+      <div className={styles.BottomBtnContainer}>
+        <div role="grid">
+        <Row gutter="20" wrap="true" hidden={['m','s','xs','xxs']}>
+          <Col span='4'></Col>
+          <Col span='16' className={styles.btnSecContainer} >
+            <img src="start.png" alt=""/>
+            <Button onClick={() => start()} className={styles.BottomBtn1}>启动智能驾驶</Button>
+          
+            <Button onClick={() => slowStop()} className={styles.BottomBtn2}>缓停开关</Button>
+          
+            <Button onClick={() => emergencyStop()} className={styles.BottomBtn3}>急停开关</Button>
+          </Col>
+          <Col span='4'></Col>
+        </Row>
+        </div>
+      </div>  
     </div>
   );
 }

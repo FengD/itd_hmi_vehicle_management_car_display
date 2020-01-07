@@ -4,7 +4,7 @@
   "description": "该模板适用于设备管理类的后台系统，内置列表管理页、表单新增编辑页及表单查看页，这三个页面可形成一个闭环",
   "author": "ice-admin@alibaba-inc.com",
   "dependencies": {
-    "@alifd/next": "^1.x",
+    "@alifd/next": "^1.19.6",
     "@antv/data-set": "^0.10.1",
     "@ice/store": "^0.3.0",
     "@icedesign/container": "^1.x",
@@ -17,6 +17,7 @@
     "classnames": "^2.2.5",
     "dva-cli": "^0.10.1",
     "moment": "^2.23.0",
+    "node-sass": "^4.13.0",
     "prop-types": "^15.5.8",
     "pubsub-js": "^1.7.0",
     "react": "^16.4.1",
