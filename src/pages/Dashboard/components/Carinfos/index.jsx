@@ -5,7 +5,7 @@ import styles from './index.module.scss';
 export default class Carinfo extends React.Component {
 
   render(){
-    console.log("this.props.carinfo",this.props.carinfo);
+    // console.log("this.props.carinfo",this.props.carinfo);
     return (<IceContainer className={styles.container}>
       <h3 className={styles.title}>车辆情况</h3>
       <ul>

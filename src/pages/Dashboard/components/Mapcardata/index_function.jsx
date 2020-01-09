@@ -5,28 +5,43 @@ import Carinfo from '../Carinfos';
 import styles from './index.module.scss';
 import Mymap from './map';
 import RouteButton from './routeButton';
-
 import stores from '@/stores/index';
 import { useRequest } from '@/utils/request';
 import { carProfile, routeName, routeInfo, start, slowStop, emergencyStop } from '@/config/dataSource';
-import { serverIP } from '@/config/settings.js';
+import { serverIp } from '@/config/settings.js';
+import { random } from 'gl-matrix/src/gl-matrix/vec2';
 
 const { Row, Col } = Grid;
 
 export default function Mapcardata() {
-  //route info 
-  // var initialRouteState = [["1", "综合楼--设计中心"], ["2", "综合楼--广场"], ["3", "综合楼--食堂"]];
-  var initialRouteState = [{ "route_id": 1, "route_name": "1111" }, { "route_id": 2, "route_name": "2222" }, { "route_id": 3, "route_name": "3333" },]
-
-  const [routeState, setRouteState] = useState(initialRouteState);
+  //route id name 
   const routeName = stores.useStore('routeName');
-  const { routeNameID, fetchRouteData } = routeName;
-  // useEffect(() => {
-  //   console.log("useEffect");
-  //   fetchRouteData().then(setRouteState({
-  //     routeState: routeNameID
-  //   }));
-  // }, []);
+  const { routeNameId, fetchRouteData } = routeName;
+  useEffect(() => {
+    // console.log("useeffect");
+    fetchRouteData(localStorage.getItem('carId'), localStorage.getItem('token'));
+    // setInterval(() => {
+    //   var lat = 35 + Math.random() * 10;
+    //   var long = 120 + Math.random() * 10;
+    //   let tempList = Object.assign(bindState, {
+    //     "map": { longitude: long, latitude: lat },
+    //     "center": { longitude: long, latitude: lat },
+    //   })
+    //   setBindState(tempList);
+    //   // handleWsmessage(lat, long);
+    //   console.log("bindState", bindState);
+    // }, 10000);
+    // return () => clearInterval(id);
+  }, []);
+
+  async function handleWsmessage(lat, long) {
+    if (lat != bindState["map"]["latitude"] && long != bindState["map"]["longitude"]) {
+      let tempList = Object.assign(bindState, {
+        "map": { longitude: long, latitude: lat },
+      })
+      await setBindState(tempList);
+    }
+  }
 
   //route json initial
   var jsonState = [{ latitude: 39.9784437501, longitude: 116.3522046804 },
@@ -36,37 +51,30 @@ export default function Mapcardata() {
   { latitude: 39.9784437501, longitude: 116.3522046804 }];
 
   //mapstate initial
-  // var mapState = [116.353015, 39.978694];
   var mapState = { longitude: 116.353015, latitude: 39.978694 };
 
   //bindstate to map component
-  // var initialBindState = [mapState, jsonState];
   var initialBindState = {
     "map": mapState,
     "json": jsonState,
+    "center": mapState,
   }
   const [bindState, setBindState] = useState(initialBindState);
 
   //route json get
   const routeInfo = stores.useStore('routeInfo');
-  const { routejson, fetchJsonData } = routeInfo;
+  const { routeJson, fetchJsonData } = routeInfo;
 
-  async function getRouteJson(routeid) {
-    try {
-      localStorage.setItem("routeid", routeid);
-      console.log("getCityJson", routeid);
-      await fetchJsonData();
+  function getRouteJson(routeId) {
+    localStorage.setItem("routeId", routeId);
+    fetchJsonData(routeId, (routeJson) => {
+      console.log("bindStateRouteJson", routeJson);
       let btnList = Object.assign(bindState, {
-        "json": routejson["route_json"],
+        "json": JSON.parse(routeJson["route_point"]),
+        "center": JSON.parse(routeJson["start_point"]),
       });
-      setBindState(
-        btnList
-      );
-    } catch (err) {
-      // Message.error("路线json获取失败");
-      console.log("getRouteJsonErr", err);
-    }
-
+      setBindState(btnList);
+    });
   }
 
   //map info and car info websocket to transport frequently changing data
@@ -77,29 +85,24 @@ export default function Mapcardata() {
   };
   const [carState, setCarState] = useState(initialCarState);
 
-  var ws = new WebSocket('ws://' + serverIP + '/car/ws?token=' + localStorage.getItem("token"));
+  var ws = new WebSocket('ws://' + serverIp + '/ws/car?token=' + localStorage.getItem("token"));
   ws.onopen = function () {
     ws.send(localStorage.getItem("token"));
   };
 
   //only one onmessage . have two parts 1.location 2.carstatus
   ws.onmessage = function (e) {
-    console.log('client: received %s', e.data);
-    
-    if (e.data["type"] == "current_position") {
-      console.log("current_position", e.data["content"]);
-      let btnList = Object.assign(bindState, {
-        "map": JSON.parse(e.data["content"]),
+    const message = JSON.parse(e.data);
+    if (message["type"] == "current_position") {
+      console.log("start");
+      let tempList = Object.assign(bindState, {
+        "map": { longitude: 117.353015, latitude: 38.978694 },
       })
-      setBindState(
-        btnList
-      )
+      setBindState(tempList);
     }
-
-    if (e.data["type"] == "current_status") {
-      console.log("current_status", e.data["content"]);
+    else if (message["type"] == "current_status") {
       setCarState({
-        carState: JSON.parse(e.data["content"])
+        carState: message["content"]
       });
     }
   };
@@ -150,10 +153,10 @@ export default function Mapcardata() {
       <Row gutter="20">
         <Col l="4">
           <IceContainer className={styles.card}>
-            {routeState.map((route) =>
+            {routeNameId.map((route) =>
               (<div onClick={() => getRouteJson(route["route_id"])}
                 key={Math.random()}>
-                <RouteButton name={route["route_name"]}></RouteButton>
+                <RouteButton name={route["name"]}></RouteButton>
               </div>)
             )}
           </IceContainer>
@@ -179,6 +182,6 @@ export default function Mapcardata() {
           <Button onClick={() => emergencyStop()} disabled={!startState}>急停开关</Button>
         </Col>
       </Row>
-    </div>
+    </div >
   );
 }

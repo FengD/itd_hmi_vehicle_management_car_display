@@ -138,7 +138,7 @@ function handleResponse(response) {
   // Please modify the status key according to your business logic
   // normally the key is `status` or `code`
   
-  if (data.status === 'SUCCESS') {
+  if (data.status === 200) {
     return { data };
   } else if (data.status === 'NOT_LOGIN') {
     location.href = '';

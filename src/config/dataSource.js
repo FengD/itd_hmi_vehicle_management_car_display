@@ -1,8 +1,8 @@
-import { serverIP } from './settings';
+import { serverIp } from './settings';
 //   // baseURL: '192.168.8.20',
 //   url: '/api/profile',
 //   method: 'GET',
-//   token: localStorage.getItem('token'),
+//   headers: { token: localStorage.getItem('token') },
 // };
 
 // export const userLogout = {
@@ -27,74 +27,76 @@ import { serverIP } from './settings';
 
 
 // export const carProfile = {
-//   baseURL: 'http://' + serverIP,
+//   baseURL: 'http://' + serverIp,
 //   url: '/car/profile',
 //   method: 'GET',
-//   token: localStorage.getItem('token'),
+//   headers: { token: localStorage.getItem('token') },
 // };
 
 // export const menu = {
 //   url: '/api/menu',
-//   method: 'GET',
+//   method: 'GET',  headers: { token: localStorage.getItem('token') },
+
 // };
 
 export const login = {
-  baseURL: 'http://' + serverIP,
+  baseURL: 'http://' + serverIp,
   url: '/car/login',
   method: 'POST',
 };
 
 export const logout = {
-  baseURL: 'http://' + serverIP,
-  url: '/car/' + localStorage.getItem('carid') + '/logout',
+  baseURL: 'http://' + serverIp,
+  url: '/car/' + localStorage.getItem('carId') + '/logout',
   method: 'POST',
-  token: localStorage.getItem('token'),
+  headers: { token: localStorage.getItem('token') },
 };
 
 export const register = {
-  baseURL: 'http://' + serverIP,
+  baseURL: 'http://' + serverIp,
   url: '/car/register',
   method: 'POST',
 };
 
 export const carProfile = {
-  baseURL: 'http://' + serverIP,
-  url: '/car/' + localStorage.getItem('carid') + '/car_profile',
+  baseURL: 'http://' + serverIp,
+  url: '/car/' + localStorage.getItem('carId') + '/profile',
   method: 'GET',
-  token: localStorage.getItem('token'),
+  headers: { token: localStorage.getItem('token') },
 };
 
-export const routeName = {
-  baseURL: 'http://' + serverIP,
-  url: '/route/car/' + localStorage.getItem('carid') + '/all',
-  method: 'GET',
-  token: localStorage.getItem('token'),
-};
+// export const routeName = {
+//   baseURL: 'http://' + serverIp,
+//   // url: '/route/car/' + localStorage.getItem('carId') + '/all',
+//   url: '/route/car/' + localStorage.getItem('carId'),
+//   method: 'GET',
+//   headers: { token: localStorage.getItem('token') },
+// };
 
-export const routeInfo = {
-  baseURL: 'http://' + serverIP,
-  url: '/route/' + localStorage.getItem('routeid'),
-  method: 'GET',
-  token: localStorage.getItem('token'),
-};
+// export const routeInfo = {
+//   baseURL: 'http://' + serverIp,
+//   url: '/route/' + localStorage.getItem('routeid'),
+//   method: 'GET',
+//   headers: { token: localStorage.getItem('token') },
+// };
 
 export const start = {
-  baseURL: 'http://' + serverIP,
-  url: '/car/' + localStorage.getItem('carid') + '/action/start',
+  baseURL: 'http://' + serverIp,
+  url: '/car/' + localStorage.getItem('carId') + '/action/start',
   method: 'POST',
-  token: localStorage.getItem('token'),
+  headers: { token: localStorage.getItem('token') },
 };
 
 export const slowStop = {
-  baseURL: 'http://' + serverIP,
-  url: '/car/' + localStorage.getItem('carid') + '/action/slow_stop',
+  baseURL: 'http://' + serverIp,
+  url: '/car/' + localStorage.getItem('carId') + '/action/slow_stop',
   method: 'POST',
-  token: localStorage.getItem('token'),
+  headers: { token: localStorage.getItem('token') },
 };
 
 export const emergencyStop = {
-  baseURL: 'http://' + serverIP,
-  url: '/car/' + localStorage.getItem('carid') + '/action/emergency_stop',
+  baseURL: 'http://' + serverIp,
+  url: '/car/' + localStorage.getItem('carId') + '/action/emergency_stop',
   method: 'POST',
-  token: localStorage.getItem('token'),
+  headers: { token: localStorage.getItem('token') },
 };

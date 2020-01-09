@@ -7,7 +7,7 @@ export default {
     async fetchData() {
         try {
             const { data } = await request(carProfile);
-            this.carinfo = data;
+            this.carinfo = data.data;
         } catch (err) {
             console.log("fetchDataErr", err);
         }

@@ -28,9 +28,14 @@ function Header(props) {
     try {
       await request();
       Message.success('已登出');
-      localStorage.removeItem('login_status');
+      localStorage.removeItem('loginStatus');
+      localStorage.removeItem('carId');
+      localStorage.removeItem('token');
       props.history.push('/user/login');
     } catch (err) {
+      localStorage.removeItem('loginStatus');
+      localStorage.removeItem('carId');
+      localStorage.removeItem('token');
       Message.error('登出失败');
       console.error("handleLogoutErr", err);
     }

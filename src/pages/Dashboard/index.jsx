@@ -6,7 +6,7 @@ import TopActiveChart from './components/TopActiveChart';
 
 export default function Dashboard(props) {
   useEffect(() => {
-    if (localStorage.getItem('login_status') != "SUCCESS") {
+    if (localStorage.getItem('loginStatus') != 200) {
       props.history.push('/notfound');
     }
   }, []);

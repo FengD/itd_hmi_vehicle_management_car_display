@@ -4,106 +4,66 @@ import PubSub from 'pubsub-js';
 
 export default class Mymap extends React.Component {
   constructor(props) {
-    console.log("mapprops",props);
+    console.log("mapprops", props.mapdata);
     super(props);
     this.state = {
-      visible: true,
-      position: { longitude: this.props.mapdata["map"]["longitude"], latitude: this.props.mapdata["map"]["latitude"] },
+      position: this.props.mapdata["map"],
       path: this.props.mapdata["json"],
-      clickable: true,
-      draggable: true,
+      center: this.props.mapdata["map"],
     };
     // console.log("map_state", this.state);
-    this.message = null;
-    this.mapPlugins = ['ToolBar'];
-    this.markerEvents = {
-      click: () => {
-        console.log('marker clicked!')
-      }
-    }
-  }
-
-  toggleVisible() {
-    this.setState({
-      visible: !this.state.visible,
-    });
-  }
-
-  changePosition() {
-    this.setState({
-      position: {
-        longitude: 120 + Math.random() * 10,
-        latitude: 35 + Math.random() * 10
-      }
-    });
-  }
-
-  toggleClickable() {
-    this.setState({
-      clickable: !this.state.clickable,
-    });
-  }
-
-  toggleDraggable() {
-    this.setState({
-      draggable: !this.state.draggable,
-    });
   }
 
   componentDidMount() {
-    // console.log('componentDidMount');
-    // PubSub.subscribe('send-data', (msg, data) => {
-    //   if(data != null)
-    //   {
-    //     this.setState({
+    console.log('componentDidMount');
+    // setInterval(() => {
+    //   var lat = 39 + Math.random()
+    //   var long = 116 + Math.random();
+    //   this.setState(
+    //     {
     //       position: {
-    //         longitude: data[0],
-    //         latitude: data[1]
-    //       }
-    //     });
-    //     console.log("position",this.state.position);
-    //   }
-    // });
+    //         longitude: long,
+    //         latitude: lat,
+    //       },
+    //       center: {
+    //         longitude: long,
+    //         latitude: lat,
+    //       },
+    //     })
+    // }, 1000);
   }
 
   componentWillReceiveProps() {
-    console.log("this.props.mapdata",this.props.mapdata);
+    console.log("this.props.mapdata changed", this.props.mapdata);
     this.setState(
       {
-        position: { longitude: this.props.mapdata["map"][0], latitude: this.props.mapdata["map"][1] },
+        position: {
+          longitude: this.props.mapdata["map"]["longitude"],
+          latitude: this.props.mapdata["map"]["latitude"]
+        },
+        // position: this.props.mapdata["map"],
         path: this.props.mapdata["json"],
-      },
-    )
+        center: this.props.mapdata["center"],
+      })
+    // this.setState(this.props.mapdata);
+    console.log("mapState1", this.state);
   }
 
-  // componentWillUnmount() {
-  //   PubSub.unsubscribe('send-data');
-  // }
-
   render() {
+    console.log("mapState2", this.state);
     return <div>
-      <div style={{ width: '100%', height: window.innerHeight*0.7 }}>
-        <Map plugins={this.mapPlugins} center={this.state.position} zoom={20}>
+      <div style={{ width: '100%', height: window.innerHeight * 0.7 }}>
+        <Map plugins={this.mapPlugins} center={this.state.center} zoom={20}>
           <Polyline
             path={this.state.path}
           />
           <Marker
-            events={this.markerEvents}
             position={this.state.position}
-            visible={this.state.visible}
-            clickable={this.state.clickable}
-            draggable={this.state.draggable}
+          // position={this.props.mapdata["map"]}
           />
         </Map>
         {/* <Map amapkey={'5efaacc279af5490e4b90c7160cb29e8'}/> */}
       </div>
-      <button onClick={() => { this.toggleVisible() }}>Visible</button>
-      <button onClick={() => { this.toggleClickable() }}>Clickable</button>
-      <button onClick={() => { this.toggleDraggable() }}>Draggable</button>
     </div>
   }
 }
-
-// ReactDOM.render(
-//   <App/>, mountNode
-// )

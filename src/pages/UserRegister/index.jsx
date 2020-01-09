@@ -67,7 +67,7 @@ function UserRegister(props) {
       await request({
         data: params,
       });
-      console.log('login_res', login_res);
+      console.log('loginRes', loginRes);
       Message.success('注册成功');
       props.history.push('/user/login');
     } catch (err) {
