@@ -31,7 +31,7 @@ function Header(props) {
       localStorage.removeItem('loginStatus');
       localStorage.removeItem('carId');
       localStorage.removeItem('token');
-      props.history.push('/user/login');
+      props.history.push('/car/login');
     } catch (err) {
       localStorage.removeItem('loginStatus');
       localStorage.removeItem('carId');
@@ -45,9 +45,7 @@ function Header(props) {
   // var initialCarProfile = "260";
   // const [carProfileState, setCarProfileState] = use
   const carProfile = stores.useStore('carProfile');
-  const { carinfo, fetchData } = carProfile;
-  // const { name } = carinfo["car_name"];
-  const { name } = "260";
+  const { carInfo, fetchData } = carProfile;
   // const { toggle } = expandAside;
 
   useEffect(() => {
@@ -71,7 +69,7 @@ function Header(props) {
           className={styles.userAvatar}
         />
         <span className={styles.userName}>
-          {name}
+          {carInfo["project"]}
           <Icon className={styles.headerArrow} size="xs" type="arrow-down" />
         </span>
       </div>
@@ -88,7 +86,7 @@ function Header(props) {
         style={{ width: '80px' }}
       >
         <div className={styles.personalMenu} onClick={handleLogout}>
-          <Link to="/user/login">退出</Link>
+          <Link to="/car/login">退出</Link>
         </div>
       </Balloon>
     );

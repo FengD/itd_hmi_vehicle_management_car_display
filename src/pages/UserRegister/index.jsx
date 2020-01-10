@@ -57,7 +57,7 @@ function UserRegister(props) {
       }
       console.log(values);
       // Message.success('注册成功');
-      // props.history.push('/user/login');
+      // props.history.push('/car/login');
       handleRegister(values);
     });
   };
@@ -69,7 +69,7 @@ function UserRegister(props) {
       });
       console.log('loginRes', loginRes);
       Message.success('注册成功');
-      props.history.push('/user/login');
+      props.history.push('/car/login');
     } catch (err) {
       Message.err('注册失败');
       console.error("handleRegisterErr", err);
@@ -156,7 +156,7 @@ function UserRegister(props) {
             >
               注 册
             </Button>
-            <Link to="/user/login" className={styles.tips}>
+            <Link to="/car/login" className={styles.tips}>
               使用已有账户登录
             </Link>
           </div>

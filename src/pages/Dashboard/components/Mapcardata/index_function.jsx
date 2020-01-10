@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import IceContainer from '@icedesign/container';
 import { Grid, Button, Message } from '@alifd/next';
-import Carinfo from '../Carinfos';
+import CarInfo from '../Carinfos';
 import styles from './index.module.scss';
 import Mymap from './map';
 import RouteButton from './routeButton';
@@ -18,30 +18,8 @@ export default function Mapcardata() {
   const routeName = stores.useStore('routeName');
   const { routeNameId, fetchRouteData } = routeName;
   useEffect(() => {
-    // console.log("useeffect");
     fetchRouteData(localStorage.getItem('carId'), localStorage.getItem('token'));
-    // setInterval(() => {
-    //   var lat = 35 + Math.random() * 10;
-    //   var long = 120 + Math.random() * 10;
-    //   let tempList = Object.assign(bindState, {
-    //     "map": { longitude: long, latitude: lat },
-    //     "center": { longitude: long, latitude: lat },
-    //   })
-    //   setBindState(tempList);
-    //   // handleWsmessage(lat, long);
-    //   console.log("bindState", bindState);
-    // }, 10000);
-    // return () => clearInterval(id);
   }, []);
-
-  async function handleWsmessage(lat, long) {
-    if (lat != bindState["map"]["latitude"] && long != bindState["map"]["longitude"]) {
-      let tempList = Object.assign(bindState, {
-        "map": { longitude: long, latitude: lat },
-      })
-      await setBindState(tempList);
-    }
-  }
 
   //route json initial
   var jsonState = [{ latitude: 39.9784437501, longitude: 116.3522046804 },
@@ -69,11 +47,11 @@ export default function Mapcardata() {
     localStorage.setItem("routeId", routeId);
     fetchJsonData(routeId, (routeJson) => {
       console.log("bindStateRouteJson", routeJson);
-      let btnList = Object.assign(bindState, {
-        "json": JSON.parse(routeJson["route_point"]),
-        "center": JSON.parse(routeJson["start_point"]),
-      });
-      setBindState(btnList);
+      setBindState(Object.assign({}, bindState,
+        {
+          "json": JSON.parse(routeJson["route_point"]),
+          "center": JSON.parse(routeJson["start_point"])
+        }));
     });
   }
 
@@ -94,16 +72,12 @@ export default function Mapcardata() {
   ws.onmessage = function (e) {
     const message = JSON.parse(e.data);
     if (message["type"] == "current_position") {
-      console.log("start");
-      let tempList = Object.assign(bindState, {
-        "map": { longitude: 117.353015, latitude: 38.978694 },
-      })
-      setBindState(tempList);
+      console.log("startPosition");
+      setBindState(Object.assign({}, bindState, { "map": message["content"] }));
     }
-    else if (message["type"] == "current_status") {
-      setCarState({
-        carState: message["content"]
-      });
+    if (message["type"] == "current_status") {
+      console.log("startStatus");
+      setCarState(message["content"]);
     }
   };
 
@@ -168,7 +142,7 @@ export default function Mapcardata() {
           </IceContainer>
         </Col>
         <Col l="6">
-          <Carinfo carinfo={carState}></Carinfo>
+          <CarInfo carInfo={carState}></CarInfo>
         </Col>
       </Row>
       <Row gutter="10">

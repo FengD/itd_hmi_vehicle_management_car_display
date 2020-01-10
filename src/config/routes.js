@@ -11,7 +11,7 @@ import NotFound from '@/pages/NotFound';
 
 const routerConfig = [
   {
-    path: '/user',
+    path: '/car',
     component: UserLayout,
     children: [
       {
@@ -47,7 +47,7 @@ const routerConfig = [
       {
         path: '/',
         // redirect: '/dashboard',
-        redirect: '/user/login',
+        redirect: '/car/login',
       },
       {
         component: NotFound,

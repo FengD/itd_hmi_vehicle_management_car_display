@@ -2,12 +2,13 @@ import { request } from '@/utils/request';
 import { carProfile } from '@/config/dataSource';
 
 export default {
-    carinfo: [],
+    carInfo: [],
 
     async fetchData() {
         try {
             const { data } = await request(carProfile);
-            this.carinfo = data.data;
+            this.carInfo = data.data;
+            console.log("data.data", data.data);
         } catch (err) {
             console.log("fetchDataErr", err);
         }

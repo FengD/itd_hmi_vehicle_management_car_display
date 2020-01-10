@@ -14,8 +14,6 @@ function UserLogin(props) {
   var loginRes;
   const { loading, request } = useRequest(login);
   const [value, setValue] = useState({
-    // username: '',
-    // password: '',
     name: '',
     pwd: '',
     checkbox: false,
@@ -94,12 +92,12 @@ function UserLogin(props) {
               <span className={styles.tipsText} style={{ marginRight: '20px' }}>
                 管理员登录：admin/admin
               </span>
-              <span className={styles.tipsText}>用户登录：user/user</span>
+              <span className={styles.tipsText}>用户登录：user/car</span>
             </p> */}
           </Row>
 
           <Row className="tips">
-            <Link to="/user/register" className={styles.tipsText}>
+            <Link to="/car/register" className={styles.tipsText}>
               立即注册
             </Link>
           </Row>

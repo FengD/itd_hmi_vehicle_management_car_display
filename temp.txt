@@ -41,7 +41,7 @@ function Header(props) {
         style={{ width: '80px' }}
       >
         <div className={styles.personalMenu}>
-          <Link to="/user/login">退出</Link>
+          <Link to="/car/login">退出</Link>
         </div>
       </Balloon>
     );
