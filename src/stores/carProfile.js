@@ -2,8 +2,8 @@ import { request } from '@/utils/request';
 import { serverIp } from '../config/settings';
 
 const carProfile = {
-    baseURL: 'http://' + serverIp,
-    url: '/car/' + "%s from f" + '/profile',
+    baseURL: `http://${serverIp}`,
+    url: '/car/%s from f/profile',
     method: 'GET',
     headers: { token: "%s from f" },
 };
@@ -11,8 +11,8 @@ const carProfile = {
 export default {
     carInfo: [],
     async fetchData(token, carId) {
-        carProfile.headers = {token};
-        carProfile.url = '/car/' + carId + '/profile';
+        carProfile.headers = { token };
+        carProfile.url = `/car/${carId}/profile`;
         try {
             const { data } = await request(carProfile);
             this.carInfo = data.data;

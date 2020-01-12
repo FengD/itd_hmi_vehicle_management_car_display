@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import IceContainer from '@icedesign/container';
 import styles from './index.module.scss';
 

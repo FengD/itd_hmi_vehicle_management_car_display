@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import FoundationSymbol from '@icedesign/foundation-symbol';
+// import FoundationSymbol from '@icedesign/foundation-symbol';
 import { Input, Checkbox, Grid, Form, Message } from '@alifd/next';
 import { useRequest } from '@/utils/request';
 import { login } from '@/config/dataSource';
 import styles from './index.module.scss';
 
-const Icon = FoundationSymbol;
+// const Icon = FoundationSymbol;
 const { Row } = Grid;
 const FormItem = Form.Item;
 
 function UserLogin(props) {
-  var loginRes;
+  let loginRes;
   const { loading, request } = useRequest(login);
   const [value, setValue] = useState({
     name: '',

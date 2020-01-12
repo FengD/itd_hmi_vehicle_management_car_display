@@ -12,7 +12,7 @@ export default function Mapcardata() {
     <Row gutter="20">
       <Col l="18">
         <IceContainer className={styles.card}>
-          <Mymap></Mymap>
+          <Mymap />
         </IceContainer>
       </Col>
       <Col l="6">

@@ -7,41 +7,40 @@ import Mymap from './map';
 import RouteButton from './routeButton';
 import stores from '@/stores/index';
 import { useRequest } from '@/utils/request';
-import { routeName, routeInfo, start, slowStop, emergencyStop } from '@/config/dataSource';
+// import { routeName, routeInfo, start, slowStop, emergencyStop } from '@/config/dataSource';
 import { serverIp } from '@/config/settings.js';
-import { random } from 'gl-matrix/src/gl-matrix/vec2';
 
 const { Row, Col } = Grid;
 
 export default function Mapcardata() {
-  //route id name 
+  // route id name 
   const routeName = stores.useStore('routeName');
   const { routeNameId, fetchRouteData } = routeName;
   useEffect(() => {
     fetchRouteData(localStorage.getItem('token'), localStorage.getItem('carId'));
-  }, []);
+  }, [fetchRouteData]);
 
-  //route json initial
-  var jsonState = [{ latitude: 39.9784437501, longitude: 116.3522046804 },
+  // route json initial
+  const jsonState = [{ latitude: 39.9784437501, longitude: 116.3522046804 },
   { latitude: 39.9784807462, longitude: 116.3534921408 },
   { latitude: 39.9789986896, longitude: 116.3534545898 },
   { latitude: 39.9790356854, longitude: 116.3521778584 },
   { latitude: 39.9784437501, longitude: 116.3522046804 }];
 
-  //mapstate initial
-  var mapState = { longitude: 116.353015, latitude: 39.978694 };
+  // mapstate initial
+  const mapState = { longitude: 116.353015, latitude: 39.978694 };
 
-  //bindstate to map component
-  var initialBindState = {
+  // bindstate to map component
+  const initialBindState = {
     "map": mapState,
     "json": jsonState,
     "center": mapState,
-  }
+  };
   const [bindState, setBindState] = useState(initialBindState);
 
-  //route json get
+  // route json get
   const routeInfo = stores.useStore('routeInfo');
-  const { routeJson, fetchJsonData } = routeInfo;
+  const { fetchJsonData } = routeInfo;
 
   function getRouteJson(routeId) {
     localStorage.setItem("routeId", routeId);
@@ -49,40 +48,42 @@ export default function Mapcardata() {
       console.log("bindStateRouteJson", routeJson);
       setBindState(Object.assign({}, bindState,
         {
-          "json": JSON.parse(routeJson["route_point"]),
-          "center": JSON.parse(routeJson["start_point"])
+          "json": JSON.parse(routeJson.route_point),
+          "center": JSON.parse(routeJson.start_point),
         }));
     });
   }
 
-  //map info and car info websocket to transport frequently changing data
-  //car info
-  var initialCarState = {
+  // map info and car info websocket to transport frequently changing data
+  // car info
+  const initialCarState = {
     driveStatus: 0, obstacleAvoid: 0, locationStatus: 0, GPSStatus: 0,
-    actuatorFailure: 0, sensorFailure: 0
+    actuatorFailure: 0, sensorFailure: 0,
   };
   const [carState, setCarState] = useState(initialCarState);
 
-  var ws = new WebSocket('ws://' + serverIp + '/ws/car?token=' + localStorage.getItem("token"));
+  const ws = new WebSocket(`ws://${serverIp}/ws/car?token=${localStorage.getItem("token")}`);
   ws.onopen = function () {
     ws.send(localStorage.getItem("token"));
   };
 
-  //only one onmessage . have two parts 1.location 2.carstatus
+  // only one onmessage . have two parts 1.location 2.carstatus
   ws.onmessage = function (e) {
     const message = JSON.parse(e.data);
-    if (message["type"] == "current_position") {
+    // eslint-disable-next-line eqeqeq
+    if (message.type == "current_position") {
       console.log("startPosition");
-      setBindState(Object.assign({}, bindState, { "map": message["content"] }));
+      setBindState(Object.assign({}, bindState, { "map": message.content }));
     }
-    if (message["type"] == "current_status") {
+    // eslint-disable-next-line eqeqeq
+    if (message.type == "current_status") {
       console.log("startStatus");
-      setCarState(message["content"]);
+      setCarState(message.content);
     }
   };
 
-  //drive action
-  var initialStartState = false;
+  // drive action
+  const initialStartState = false;
   const [startState, setStartState] = useState(initialStartState);
 
   const { driveRequest } = useRequest(start);
@@ -128,9 +129,9 @@ export default function Mapcardata() {
         <Col l="4">
           <IceContainer className={styles.card}>
             {routeNameId.map((route) =>
-              (<div onClick={() => getRouteJson(route["route_id"])}
+              (<div onClick={() => getRouteJson(route.route_id)}
                 key={Math.random()}>
-                <RouteButton name={route["name"]}></RouteButton>
+                <RouteButton name={route.name} />
               </div>)
             )}
           </IceContainer>
@@ -142,7 +143,7 @@ export default function Mapcardata() {
           </IceContainer>
         </Col>
         <Col l="6">
-          <CarInfo carInfo={carState}></CarInfo>
+          <CarInfo carInfo={carState} />
         </Col>
       </Row>
       <Row gutter="10">

@@ -8,13 +8,11 @@ import {
 } from '@icedesign/form-binder';
 import IceIcon from '@icedesign/foundation-symbol';
 import styles from './index.module.scss';
-
 import { useRequest } from '@/utils/request';
 import { register } from '@/config/dataSource';
-import { async } from 'q';
 
 function UserRegister(props) {
-  const { loading, request } = useRequest(register);
+  const { request } = useRequest(register);
   const [formValue, setFormValue] = useState({
     name: '',
     email: '',
@@ -67,7 +65,6 @@ function UserRegister(props) {
       await request({
         data: params,
       });
-      console.log('loginRes', loginRes);
       Message.success('注册成功');
       props.history.push('/car/login');
     } catch (err) {
@@ -75,8 +72,6 @@ function UserRegister(props) {
       console.error("handleRegisterErr", err);
     }
   }
-
-
 
   return (
     <div className={styles.container}>

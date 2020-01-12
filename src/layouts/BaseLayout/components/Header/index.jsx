@@ -1,28 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Layout from '@icedesign/layout';
 import { Icon, Balloon, Nav, Message, Button } from '@alifd/next';
 import { Link, withRouter } from 'react-router-dom';
 import { asideMenuConfig } from '@/config/menu.js';
 import Logo from '../Logo';
 import styles from './index.module.scss';
-
 import stores from '@/stores/index';
 import { useRequest } from '@/utils/request';
 import { logout } from '@/config/dataSource';
 
-import FoundationSymbol from '@icedesign/foundation-symbol';
-import { FormattedMessage, injectIntl } from 'react-intl';
-
 function Header(props) {
   const { request } = useRequest(logout);
   console.log("logoutRequest", request);
-  function getLocaleKey(item) {
-    return `app.header.${item.name}`;
-  }
-
-  function handleSetting() {
-    props.history.push('/account/setting');
-  }
 
   async function handleLogout() {
     try {
@@ -42,7 +31,7 @@ function Header(props) {
     }
   }
 
-  //carProfile
+  // carProfile
   const carProfile = stores.useStore('carProfile');
   const { carInfo, fetchData } = carProfile;
   // const { toggle } = expandAside;
@@ -50,7 +39,7 @@ function Header(props) {
   useEffect(() => {
     console.log("test profile");
     fetchData(localStorage.getItem("token"), localStorage.getItem("carId"));
-  }, []);
+  }, [fetchData]);
 
   function getSelectKeys() {
     const selectKeys = props.location.pathname.split('/').filter(i => i);
@@ -69,7 +58,7 @@ function Header(props) {
           className={styles.userAvatar}
         />
         <span className={styles.userName}>
-          {carInfo["city"]}
+          {carInfo.city}
           <Icon className={styles.headerArrow} size="xs" type="arrow-down" />
         </span>
       </div>

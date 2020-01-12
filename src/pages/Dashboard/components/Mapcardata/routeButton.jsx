@@ -1,5 +1,5 @@
 import { Button } from '@alifd/next';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 export default function RouteButton(props) {
     // console.log("name", props.name)

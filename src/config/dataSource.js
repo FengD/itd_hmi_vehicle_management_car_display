@@ -40,20 +40,20 @@ import { serverIp } from './settings';
 // };
 
 export const login = {
-  baseURL: 'http://' + serverIp,
+  baseURL: `http://${serverIp}`,
   url: '/car/login',
   method: 'POST',
 };
 
 export const logout = {
-  baseURL: 'http://' + serverIp,
-  url: '/car/' + localStorage.getItem('carId') + '/logout',
+  baseURL: `http://${serverIp}`,
+  url: `/car/${localStorage.getItem('carId')}/logout`,
   method: 'POST',
   headers: { token: localStorage.getItem('token') },
 };
 
 export const register = {
-  baseURL: 'http://' + serverIp,
+  baseURL: `http://${serverIp}`,
   url: '/car/register',
   method: 'POST',
 };
@@ -81,22 +81,22 @@ export const register = {
 // };
 
 export const start = {
-  baseURL: 'http://' + serverIp,
-  url: '/car/' + localStorage.getItem('carId') + '/action/start',
+  baseURL: `http://${serverIp}`,
+  url: `/car/${localStorage.getItem('carId')}/action/start`,
   method: 'POST',
   headers: { token: localStorage.getItem('token') },
 };
 
 export const slowStop = {
-  baseURL: 'http://' + serverIp,
-  url: '/car/' + localStorage.getItem('carId') + '/action/slow_stop',
+  baseURL: `http://${serverIp}`,
+  url: `/car/${localStorage.getItem('carId')}/action/slow_stop`,
   method: 'POST',
   headers: { token: localStorage.getItem('token') },
 };
 
 export const emergencyStop = {
-  baseURL: 'http://' + serverIp,
-  url: '/car/' + localStorage.getItem('carId') + '/action/emergency_stop',
+  baseURL: `http://${serverIp}`,
+  url: `/car/${localStorage.getItem('carId')}/action/emergency_stop`,
   method: 'POST',
   headers: { token: localStorage.getItem('token') },
 };

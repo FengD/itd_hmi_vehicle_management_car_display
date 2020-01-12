@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid } from '@alifd/next';
 import Footer from './components/Footer';
 import Intro from './components/Intro';
+import Header from './components/Header';
 import styles from './index.module.scss';
 
 const { Row, Col } = Grid;
@@ -9,6 +10,7 @@ const { Row, Col } = Grid;
 export default function UserLayout(props) {
   return (
     <div className={styles.container}>
+      <Header />
       <Row wrap className={styles.row}>
         <Col l="12">
           <Intro />
