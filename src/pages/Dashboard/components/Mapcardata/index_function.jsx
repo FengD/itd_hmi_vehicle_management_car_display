@@ -7,7 +7,7 @@ import Mymap from './map';
 import RouteButton from './routeButton';
 import stores from '@/stores/index';
 import { useRequest } from '@/utils/request';
-import { carProfile, routeName, routeInfo, start, slowStop, emergencyStop } from '@/config/dataSource';
+import { routeName, routeInfo, start, slowStop, emergencyStop } from '@/config/dataSource';
 import { serverIp } from '@/config/settings.js';
 import { random } from 'gl-matrix/src/gl-matrix/vec2';
 
@@ -18,7 +18,7 @@ export default function Mapcardata() {
   const routeName = stores.useStore('routeName');
   const { routeNameId, fetchRouteData } = routeName;
   useEffect(() => {
-    fetchRouteData(localStorage.getItem('carId'), localStorage.getItem('token'));
+    fetchRouteData(localStorage.getItem('token'), localStorage.getItem('carId'));
   }, []);
 
   //route json initial
@@ -45,7 +45,7 @@ export default function Mapcardata() {
 
   function getRouteJson(routeId) {
     localStorage.setItem("routeId", routeId);
-    fetchJsonData(routeId, (routeJson) => {
+    fetchJsonData(localStorage.getItem("token"), routeId, (routeJson) => {
       console.log("bindStateRouteJson", routeJson);
       setBindState(Object.assign({}, bindState,
         {

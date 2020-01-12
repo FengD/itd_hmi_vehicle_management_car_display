@@ -58,12 +58,12 @@ export const register = {
   method: 'POST',
 };
 
-export const carProfile = {
-  baseURL: 'http://' + serverIp,
-  url: '/car/' + localStorage.getItem('carId') + '/profile',
-  method: 'GET',
-  headers: { token: localStorage.getItem('token') },
-};
+// export const carProfile = {
+//   baseURL: 'http://' + serverIp,
+//   url: '/car/' + localStorage.getItem('carId') + '/profile',
+//   method: 'GET',
+//   headers: { token: localStorage.getItem('token') },
+// };
 
 // export const routeName = {
 //   baseURL: 'http://' + serverIp,

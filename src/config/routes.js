@@ -44,11 +44,12 @@ const routerConfig = [
         path: '/view',
         component: View,
       },
-      {
-        path: '/',
-        // redirect: '/dashboard',
-        redirect: '/car/login',
-      },
+      // {
+      //   path: '/',
+      //   // redirect: '/dashboard',
+      //   redirect: '/car/login',
+      //   // component: UserLogin,
+      // },
       {
         component: NotFound,
       },

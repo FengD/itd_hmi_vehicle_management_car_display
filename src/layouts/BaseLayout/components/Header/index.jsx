@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '@icedesign/layout';
-import { Icon, Balloon, Nav, Message } from '@alifd/next';
+import { Icon, Balloon, Nav, Message, Button } from '@alifd/next';
 import { Link, withRouter } from 'react-router-dom';
 import { asideMenuConfig } from '@/config/menu.js';
 import Logo from '../Logo';
@@ -15,7 +15,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 
 function Header(props) {
   const { request } = useRequest(logout);
-
+  console.log("logoutRequest", request);
   function getLocaleKey(item) {
     return `app.header.${item.name}`;
   }
@@ -31,25 +31,25 @@ function Header(props) {
       localStorage.removeItem('loginStatus');
       localStorage.removeItem('carId');
       localStorage.removeItem('token');
+      console.log("------------------");
       props.history.push('/car/login');
     } catch (err) {
-      localStorage.removeItem('loginStatus');
-      localStorage.removeItem('carId');
-      localStorage.removeItem('token');
+      // localStorage.removeItem('loginStatus');
+      // localStorage.removeItem('carId');
+      // localStorage.removeItem('token');
       Message.error('登出失败');
       console.error("handleLogoutErr", err);
     }
   }
 
   //carProfile
-  // var initialCarProfile = "260";
-  // const [carProfileState, setCarProfileState] = use
   const carProfile = stores.useStore('carProfile');
   const { carInfo, fetchData } = carProfile;
   // const { toggle } = expandAside;
 
   useEffect(() => {
-    fetchData();
+    console.log("test profile");
+    fetchData(localStorage.getItem("token"), localStorage.getItem("carId"));
   }, []);
 
   function getSelectKeys() {
@@ -69,7 +69,7 @@ function Header(props) {
           className={styles.userAvatar}
         />
         <span className={styles.userName}>
-          {carInfo["project"]}
+          {carInfo["city"]}
           <Icon className={styles.headerArrow} size="xs" type="arrow-down" />
         </span>
       </div>
@@ -85,9 +85,9 @@ function Header(props) {
         className={styles.headerBalloon}
         style={{ width: '80px' }}
       >
-        <div className={styles.personalMenu} onClick={handleLogout}>
-          <Link to="/car/login">退出</Link>
-        </div>
+        <Button className={styles.personalMenu} onClick={handleLogout}>
+          退出
+        </Button>
       </Balloon>
     );
   }

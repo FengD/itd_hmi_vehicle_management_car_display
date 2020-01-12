@@ -1,18 +1,18 @@
 import { request } from '@/utils/request';
-// import { routeInfo } from '@/config/dataSource';
 import { serverIp } from '../config/settings';
 
 const routeInfo = {
     baseURL: 'http://' + serverIp,
-    url: '/route/' + 1,
+    url: '/route/' + "%s from f",
     method: 'GET',
-    headers: { token: localStorage.getItem('token') },
+    headers: { token: "%s from f" },
 };
 
 export default {
     routeJson: [],
-    async fetchJsonData(routeId, cb) {
+    async fetchJsonData(token, routeId, cb) {
         try {
+            routeInfo.headers = { token };
             routeInfo.url = '/route/' + routeId;
             const { data } = await request(routeInfo);
             this.routeJson = data.data;
