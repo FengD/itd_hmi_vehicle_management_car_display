@@ -5,6 +5,8 @@ import routes from '@/config/routes';
 
 const RouteItem = (props) => {
   const { redirect, path: routePath, component, key } = props;
+  // console.log("routes", routes);
+  // console.log("props", props);
   if (redirect) {
     return (
       <Redirect
@@ -51,15 +53,15 @@ const router = () => {
                       </Switch>
                     </RouteComponent>
                   ) : (
-                    <>
-                      {
-                        RouteItem({
-                          key: id,
-                          ...route,
-                        })
-                      }
-                    </>
-                  )
+                      <>
+                        {
+                          RouteItem({
+                            key: id,
+                            ...route,
+                          })
+                        }
+                      </>
+                    )
                 );
               }}
             />

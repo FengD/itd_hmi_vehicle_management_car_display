@@ -1,16 +1,22 @@
 import { request } from '@/utils/request';
-import { routeInfo } from '@/config/dataSource';
+import { serverIp } from '../config/settings';
+
+const routeInfo = {
+    baseURL: `http://${serverIp}`,
+    url: '/route/%s from f',
+    method: 'GET',
+    headers: { token: "%s from f" },
+};
 
 export default {
-    routeinfo: {
-        info: {},
-    },
-
-    async fetchJsonData() {
+    routeJson: [],
+    async fetchJsonData(token, routeId, cb) {
         try {
+            routeInfo.headers = { token };
+            routeInfo.url = `/route/${routeId}`;
             const { data } = await request(routeInfo);
-            const { info } = data.data;
-            this.routeinfo = { info };
+            this.routeJson = data.data;
+            cb(this.routeJson);
         } catch (err) {
             console.log("fetchJsonDataErr", err);
         }

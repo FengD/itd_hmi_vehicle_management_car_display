@@ -1,20 +1,22 @@
 import { request } from '@/utils/request';
-import { carProfile } from '@/config/dataSource';
+import { serverIp } from '../config/settings';
+
+const carProfile = {
+    baseURL: `http://${serverIp}`,
+    url: '/car/%s from f/profile',
+    method: 'GET',
+    headers: { token: "%s from f" },
+};
 
 export default {
-    carinfo: {
-        name: '',
-        department: '',
-        avatar: '',
-    },
-    carid: '',
-
-    async fetchData() {
+    carInfo: [],
+    async fetchData(token, carId) {
+        carProfile.headers = { token };
+        carProfile.url = `/car/${carId}/profile`;
         try {
             const { data } = await request(carProfile);
-            const { name, department, avatar, carid } = data.data;
-            this.userinfo = { name, department, avatar };
-            this.carid = carid;
+            this.carInfo = data.data;
+            console.log("data.data", data.data);
         } catch (err) {
             console.log("fetchDataErr", err);
         }

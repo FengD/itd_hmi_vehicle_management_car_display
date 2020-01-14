@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import IceContainer from '@icedesign/container';
 import styles from './index.module.scss';
 
@@ -54,9 +54,9 @@ export default class Carinfo extends React.Component {
                 <Switch className={styles.switch} defaultChecked={speed_status} onChange={onChange} size="small" />
               </span>
             </div> */}
-          </div>
-        </li>
-      </ul>
-    </IceContainer>)
-  }
+        </div>
+      </li>
+    </ul>
+  </IceContainer>);
+}
 }

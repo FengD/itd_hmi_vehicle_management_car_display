@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import FoundationSymbol from '@icedesign/foundation-symbol';
+// import FoundationSymbol from '@icedesign/foundation-symbol';
 import { Input, Checkbox, Grid, Form, Message } from '@alifd/next';
 import { useRequest } from '@/utils/request';
 import { login } from '@/config/dataSource';
 import styles from './index.module.scss';
 
-const Icon = FoundationSymbol;
+// const Icon = FoundationSymbol;
 const { Row } = Grid;
 const FormItem = Form.Item;
 
 function UserLogin(props) {
-  var login_res;
+  let loginRes;
   const { loading, request } = useRequest(login);
   const [value, setValue] = useState({
-    // username: '',
-    // password: '',
     name: '',
     pwd: '',
     checkbox: false,
@@ -36,13 +34,13 @@ function UserLogin(props) {
 
   async function handleLogin(params) {
     try {
-      login_res = await request({
+      loginRes = await request({
         data: params,
       });
-      console.log('login_res', login_res);
-      localStorage.setItem('token', login_res.data.token);
-      localStorage.setItem('carid', login_res.data.car.id);
-      localStorage.setItem('login_status', login_res.data.status);
+      console.log('loginRes', loginRes);
+      localStorage.setItem('token', loginRes.data.token);
+      localStorage.setItem('carId', loginRes.data.car.car_id);
+      localStorage.setItem('loginStatus', loginRes.data.status);
       Message.success('登录成功');
       props.history.push('/dashboard');
     } catch (err) {
@@ -94,12 +92,12 @@ function UserLogin(props) {
               <span className={styles.tipsText} style={{ marginRight: '20px' }}>
                 管理员登录：admin/admin
               </span>
-              <span className={styles.tipsText}>用户登录：user/user</span>
+              <span className={styles.tipsText}>用户登录：user/car</span>
             </p> */}
           </Row>
 
           <Row className="tips">
-            <Link to="/user/register" className={styles.tipsText}>
+            <Link to="/car/register" className={styles.tipsText}>
               立即注册
             </Link>
           </Row>

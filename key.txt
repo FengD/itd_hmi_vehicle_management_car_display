@@ -18,3 +18,13 @@ center: {
 腾讯高德：39.9789100000,116.3529300000
 图吧地图：39.9780650600,116.3420838500
 谷歌地球：39.9775850600,116.3467738500
+
+{"carId":0,"msg":{"type":"current_position","content":{"latitude":31.3267172685216,"longitude":121.549210926099}}}
+
+{"carId":1,"msg":{"type":"current_position","content":{"latitude":31.3267172685216,"longitude":121.549210926099}}}
+
+{"carId":2,"msg":{"type":"current_position","content":{"latitude":31.3267172685216,"longitude":121.549210926099}}}
+
+{"carId":1,"msg":{"type":"current_status","content":{"driveStatus":1,"obstacleAvoid":2,"locationStatus":3,"GPSStatus":4,"sensorFailure":5,"actuatorFailure":6}}}
+
+{"carId":1,"msg":{"type":"current_position","content":{"latitude":31.3267521711586,"longitude":121.549210926099}}}
