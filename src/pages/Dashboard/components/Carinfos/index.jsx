@@ -36,11 +36,17 @@ export default class Carinfo extends React.Component {
       <ul>
         <li className={styles.userItem} >
           <div className={styles.userInfo}>
+            <br></br>
             <h6 className={styles.userName}>智驾状态：{this.props.carinfo.driveStatus}</h6>
+            <br></br>
             <h6 className={styles.userName}>避障触发：{this.props.carinfo.obstacleAvoid}</h6>
+            <br></br>
             <h6 className={styles.userName}>定位状态：{this.props.carinfo.locationStatus}</h6>
+            <br></br>
             <h6 className={styles.userName}>GPS状态：{this.props.carinfo.GPSStatus}</h6>
+            <br></br>
             <h6 className={styles.userName}>执行器故障：{this.props.carinfo.actuatorFailure}</h6>
+            <br></br>
             <h6 className={styles.userName}>传感器故障：{this.props.carinfo.sensorFailure}</h6>
             {/* <div>
               <span >车速：{props.carinfo.speed}</span>

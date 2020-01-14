@@ -3,7 +3,7 @@
 }
 
 .card {
-  // height: 
+  //height: 320;
   padding: 0 20px !important;
 }
 
@@ -11,4 +11,28 @@
     padding-top: 5%;
     margin: auto;
     width: 80%;
+}
+
+.RouteContainer{
+    height: 320px;
+    padding: 0 20px !important;
+}
+
+.RouteList{
+
+  padding: 100px !important;
+  
+}
+
+.BottomBtnContainer{
+  margin-left: 35%;
+  padding: 15px;
+}
+
+.BottomBtn{
+  display: inline-block;
+  width: 120px;
+  background-color: #d43c43 !important;
+  color: green !important;
+  margin: 15px !important;
 }

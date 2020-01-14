@@ -21,6 +21,9 @@ export default function Mapcardata() {
   var initialRouteState = [["1", "综合楼--设计中心"], ["2", "综合楼--广场"], ["3", "综合楼--食堂"]];
 
   const [routeState, setRouteState] = useState(initialRouteState);
+  
+  
+
   const routeName = stores.useStore('routeName');
   const { routeinfo, fetchRouteData } = routeName;
   // useEffect(() => {
@@ -30,11 +33,13 @@ export default function Mapcardata() {
   // }, []);
 
   //route json initial
-  var jsonState = [{ latitude: 39.9784437501, longitude: 116.3522046804 },
-  { latitude: 39.9784807462, longitude: 116.3534921408 },
-  { latitude: 39.9789986896, longitude: 116.3534545898 },
-  { latitude: 39.9790356854, longitude: 116.3521778584 },
-  { latitude: 39.9784437501, longitude: 116.3522046804 }];
+  var jsonState = [
+    { latitude: 39.9784437501, longitude: 116.3522046804 },
+    { latitude: 39.9784807462, longitude: 116.3534921408 },
+    { latitude: 39.9789986896, longitude: 116.3534545898 },
+    { latitude: 39.9790356854, longitude: 116.3521778584 },
+    { latitude: 39.9784437501, longitude: 116.3522046804 }
+  ];
 
   //mapstate initial
   var mapState = [116.353015, 39.978694];
@@ -145,12 +150,12 @@ export default function Mapcardata() {
     <div>
       <Row gutter="20">
         <Col l="4">
-          <IceContainer className={styles.card}>
-            {routeState.map((name) =>
-              (<div onClick={() => getRouteJson(name[0])}
-                key={Math.random()}>
-                <RouteButton name={name}></RouteButton>
-              </div>)
+          <IceContainer className={styles.RouteContainer}>
+            {routeState.map( (name) =>
+              (
+                <RouteButton name={name} onClick={() => getRouteJson(name[0])}
+                key={Math.random()} className={styles.RouteList}></RouteButton>
+              )
             )}
           </IceContainer>
         </Col>
@@ -164,17 +169,14 @@ export default function Mapcardata() {
           <Carinfo carinfo={carState}></Carinfo>
         </Col>
       </Row>
-      <Row gutter="10">
-        <Col l="3">
-          <Button onClick={() => start()}>启动智能驾驶</Button>
-        </Col>
-        <Col l="3">
-          <Button onClick={() => slowStop()}>缓停开关</Button>
-        </Col>
-        <Col l="3">
-          <Button onClick={() => emergencyStop()}>急停开关</Button>
-        </Col>
-      </Row>
+      <div className={styles.BottomBtnContainer}>
+          <img src="start.png" alt=""/>
+          <Button onClick={() => start()} className={styles.BottomBtn}>启动智能驾驶</Button>
+        
+          <Button onClick={() => slowStop()} className={styles.BottomBtn}>缓停开关</Button>
+        
+          <Button onClick={() => emergencyStop()} className={styles.BottomBtn}>急停开关</Button>
+      </div>  
     </div>
   );
 }
