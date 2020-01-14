@@ -8,13 +8,11 @@ import {
 } from '@icedesign/form-binder';
 import IceIcon from '@icedesign/foundation-symbol';
 import styles from './index.module.scss';
-
 import { useRequest } from '@/utils/request';
 import { register } from '@/config/dataSource';
-import { async } from 'q';
 
 function UserRegister(props) {
-  const { loading, request } = useRequest(register);
+  const { request } = useRequest(register);
   const [formValue, setFormValue] = useState({
     name: '',
     email: '',
@@ -57,7 +55,7 @@ function UserRegister(props) {
       }
       console.log(values);
       // Message.success('注册成功');
-      // props.history.push('/user/login');
+      // props.history.push('/car/login');
       handleRegister(values);
     });
   };
@@ -67,16 +65,13 @@ function UserRegister(props) {
       await request({
         data: params,
       });
-      console.log('login_res', login_res);
       Message.success('注册成功');
-      props.history.push('/user/login');
+      props.history.push('/car/login');
     } catch (err) {
       Message.err('注册失败');
       console.error("handleRegisterErr", err);
     }
   }
-
-
 
   return (
     <div className={styles.container}>
@@ -156,7 +151,7 @@ function UserRegister(props) {
             >
               注 册
             </Button>
-            <Link to="/user/login" className={styles.tips}>
+            <Link to="/car/login" className={styles.tips}>
               使用已有账户登录
             </Link>
           </div>

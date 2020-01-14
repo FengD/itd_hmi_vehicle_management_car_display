@@ -1,16 +1,21 @@
 import { request } from '@/utils/request';
-import { routeName } from '@/config/dataSource';
+import { serverIp } from '../config/settings';
+
+const routeName = {
+    baseURL: `http://${serverIp}`,
+    url: '/route/car/%s from f',
+    method: 'GET',
+    headers: { token: "%s from f" },
+};
 
 export default {
-    routename: {
-        name: [],
-    },
-
-    async fetchRouteData() {
+    routeNameId: [],
+    async fetchRouteData(token, carId) {
+        routeName.headers = { token };
+        routeName.url = `/route/car/${carId}`;
         try {
             const { data } = await request(routeName);
-            const { name } = data.data;
-            this.routename = { name };
+            this.routeNameId = data.data;
         } catch (err) {
             console.log("fetchRouteDataErr", err);
         }

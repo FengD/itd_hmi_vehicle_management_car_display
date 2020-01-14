@@ -20,7 +20,7 @@ const headerMenuConfig = [
 
 const asideMenuConfig = [
   {
-    name: '监控页',
+    name: '智驾监控',
     path: '/dashboard',
   },
   // {
