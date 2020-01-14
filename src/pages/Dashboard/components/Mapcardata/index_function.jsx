@@ -176,11 +176,11 @@ export default function Mapcardata() {
           {/* 底部按钮响应式显示 */}
           <Row hidden={['l','xl']} wrap="true">
             <img src="start.png" alt=""/>
-            <Button onClick={() => start()} className={styles.BottomBtn1}>启动智能驾驶</Button>
+            <Button onClick={() => start()} className={styles.BottomBtn1}><span className="glyphicon glyphicon-off"></span>启动智能驾驶</Button>
           
-            <Button onClick={() => slowStop()} className={styles.BottomBtn2}>缓停开关</Button>
+            <Button onClick={() => slowStop()} className={styles.BottomBtn2}><span className="glyphicon glyphicon-refresh"></span>缓停开关</Button>
           
-            <Button onClick={() => emergencyStop()} className={styles.BottomBtn3}>急停开关</Button>
+            <Button onClick={() => emergencyStop()} className={styles.BottomBtn3}><span className="glyphicon glyphicon-exclamation-sign"></span>急停开关</Button>
           </Row>
           </div>
         </Col>
@@ -194,11 +194,11 @@ export default function Mapcardata() {
           <Col span='4'></Col>
           <Col span='16' className={styles.btnSecContainer} >
             <img src="start.png" alt=""/>
-            <Button onClick={() => start()} className={styles.BottomBtn1}>启动智能驾驶</Button>
+            <Button onClick={() => start()} className={styles.BottomBtn1}><span className="glyphicon glyphicon-off "></span>启动智能驾驶</Button>
           
-            <Button onClick={() => slowStop()} className={styles.BottomBtn2}>缓停开关</Button>
-          
-            <Button onClick={() => emergencyStop()} className={styles.BottomBtn3}>急停开关</Button>
+          <Button onClick={() => slowStop()} className={styles.BottomBtn2}><span className="glyphicon glyphicon-refresh "></span>缓停开关</Button>
+        
+          <Button onClick={() => emergencyStop()} className={styles.BottomBtn3}><span className="glyphicon glyphicon-exclamation-sign "></span>急停开关</Button>
           </Col>
           <Col span='4'></Col>
         </Row>
