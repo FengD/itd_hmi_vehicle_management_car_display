@@ -44,6 +44,9 @@ export default function Mapcardata() {
     "map": mapState,
     "json": jsonState,
     "center": mapState,
+    "startMarkers": [],
+    "endMarkers": [],
+    "pointRoute": [],
   };
   const [bindState, setBindState] = useState(initialBindState);
 
@@ -90,6 +93,59 @@ export default function Mapcardata() {
       setCarState(message.content);
     }
   };
+
+  // route start and end point
+  const routePointStart = [{ longitude: 105.99888770033331, latitude: 47.06777371167721 },
+  { longitude: 114.88681592235889, latitude: 46.94606002486967 },
+  { longitude: 110.66380007290148, latitude: 46.71616678476706 },
+  { longitude: 104.71319289749614, latitude: 31.151163346364235 },
+  { longitude: 105.64896936202821, latitude: 48.629345079177 },
+  { longitude: 105.7304857614459, latitude: 31.805981846428097 }];
+
+  const routePointEnd = [{ longitude: 114.54938904602815, latitude: 31.199534407620433 },
+  { longitude: 103.0814661277989, latitude: 30.338406977208905 },
+  { longitude: 111.90561468953058, latitude: 36.135410840814856 },
+  { longitude: 107.53662279416756, latitude: 47.082748304534654 },
+  { longitude: 110.97002080388673, latitude: 33.99917459066189 },
+  { longitude: 118.5889323304047, latitude: 35.19632485009283 }];
+
+  // create marker from given data(arry)
+  // const DrawMarker = (arr) => (
+  //   Array(arr.length).fill(true).map((e, idx) => ({
+  //     position: arr[idx],
+  //     myIndex: idx,
+  //   }))
+  // );
+
+  function DrawMarker(arr) {
+    return Array(arr.length).fill(true).map((e, idx) => ({
+      position: arr[idx],
+      myIndex: idx,
+    }));
+  };
+
+  // use two states to describe start/end points
+  function drwaStartPoints() {
+    // const startState = DrawMarker(routePointStart);
+    setBindState(Object.assign({}, bindState, { "startMarkers": DrawMarker(routePointStart) }));
+  };
+
+  function drawEndPoints() {
+    // const endState = DrawMarker(routePointEnd);
+    setBindState(Object.assign({}, bindState, { "endMarkers": DrawMarker(routePointEnd) }));
+  };
+
+  // child transfer to father to change selected start/end point
+  function receiveStartPoint(arr) {
+    // const startState = DrawMarker(arr);
+    setBindState(Object.assign({}, bindState, { "startMarkers": DrawMarker(arr) }));
+  }
+
+  function receiveEndPoint(arr, startPoint) {
+    const endState = DrawMarker(arr);
+    console.log("selectEndPoint", endState);
+    setBindState(Object.assign({}, bindState, { "endMarkers": endState, "pointRoute": [startPoint[0].position, endState[0].position] }));
+  }
 
   // drive action
   const initialStartState = false;
@@ -148,6 +204,11 @@ export default function Mapcardata() {
                 )}
               </IceContainer>
             </Row>
+
+            <Button  onClick={() => drwaStartPoints()}>选择起点</Button>
+            <br />
+            <Button  onClick={() => drawEndPoints()}>选择终点</Button>
+
             {/* 右侧车辆情况内容 */}
             <Row hidden={['xl', 'l', 'xs', 'xxs']}>
               <Carinfo carinfo={carState} className={styles.leftList} />
@@ -159,7 +220,8 @@ export default function Mapcardata() {
             <Row>
               <IceContainer className={styles.card}>
                 {/* <Mymap location={mapState} /> */}
-                <Mymap mapdata={bindState} />
+                <Mymap mapdata={bindState} selectStartPoint={(arr) => { receiveStartPoint(arr); }}
+                  selectEndPoint={(arr, startPoint) => { receiveEndPoint(arr, startPoint); }} />
               </IceContainer>
             </Row>
             {/* 底部按钮响应式显示 */}
