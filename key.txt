@@ -19,11 +19,19 @@ center: {
 图吧地图：39.9780650600,116.3420838500
 谷歌地球：39.9775850600,116.3467738500
 
+udp 方式
+echo "{\"carId\":2,\"msg\":{\"type\":\"current_position\",\"content\":{\"latitude\":31.3267172685216,\"longitude\":121.549210926099}}}" | nc -4u dingfeng.website 9997
+
+tcp方式
+netcat dingfeng.website 9998
+
+{"carId":2,"msg":{"type":"current_position","content":{"latitude":31.3267172685216,"longitude":121.549210926099}}}
+
 {"carId":0,"msg":{"type":"current_position","content":{"latitude":31.3267172685216,"longitude":121.549210926099}}}
 
 {"carId":1,"msg":{"type":"current_position","content":{"latitude":31.3267172685216,"longitude":121.549210926099}}}
 
-{"carId":2,"msg":{"type":"current_position","content":{"latitude":31.3267172685216,"longitude":121.549210926099}}}
+{"carId":2,"msg":{"type":"current_position","content":{"latitude":30.3267172685216,"longitude":121.549210926099}}}
 
 {"carId":1,"msg":{"type":"current_status","content":{"driveStatus":1,"obstacleAvoid":2,"locationStatus":3,"GPSStatus":4,"sensorFailure":5,"actuatorFailure":6}}}
 

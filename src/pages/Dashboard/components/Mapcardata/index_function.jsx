@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import IceContainer from '@icedesign/container';
-import { Grid, Button, Message,Drawer} from '@alifd/next';
+import { Grid, Button, Message } from '@alifd/next';
 import Carinfo from '../Carinfos';
 import styles from './index.module.scss';
 import Mymap from './map';
@@ -15,13 +15,13 @@ import { serverIp } from '@/config/settings.js';
 const { Row, Col } = Grid;
 
 export default function Mapcardata() {
-  //route info 
+  // route info 
   // var initialRouteState = { "1": "综合楼--设计中心", "2": "综合楼--广场", "3": "综合楼--食堂" };
   // var initialRouteState = [{ "1": "综合楼--设计中心" }, { "2": "综合楼--广场" }, { "3": "综合楼--食堂" }];
   // var initialRouteState = ["综合楼--设计中心", "综合楼--广场", "综合楼--食堂"];
-  var initialRouteState = [["1", "综合楼--设计中心"], ["2", "综合楼--广场"], ["3", "综合楼--食堂"]];
+  // const routeNameId = [["1", "综合楼--设计中心"], ["2", "综合楼--广场"], ["3", "综合楼--食堂"]];
 
-  const [routeState, setRouteState] = useState(initialRouteState);
+  // const [routeState, setRouteState] = useState(initialRouteState);
 
   const routeName = stores.useStore('routeName');
   const { routeNameId, fetchRouteData } = routeName;
@@ -138,61 +138,61 @@ export default function Mapcardata() {
         <Col l="4" s="6" hidden={['xs', 'xxs']}>
           <div role="grid">
             <Row>
-                <IceContainer className={styles.RouteContainer , styles.leftList}>
+              <IceContainer className={[styles.RouteContainer, styles.leftList]}>
                 <h3 className={styles.title}>车辆路线</h3>
-                  {routeState.map( (name) =>
-                    (
-                      <RouteButton name={route.name} onClick={() => getRouteJson(route.route_id)}
-                      key={Math.random()} className={styles.RouteList}></RouteButton>
-                    )
-                  )}
-                </IceContainer>
-           </Row>
-           {/* 右侧车辆情况内容 */}
-            <Row hidden={['xl','l','xs', 'xxs']}>
-              <Carinfo  carinfo={carState} className={styles.leftList}></Carinfo>
+                {routeNameId.map((route) =>
+                  (<div onClick={() => getRouteJson(route.route_id)}
+                    key={Math.random()}>
+                    <RouteButton className={styles.RouteList} name={route.name} />
+                  </div>)
+                )}
+              </IceContainer>
+            </Row>
+            {/* 右侧车辆情况内容 */}
+            <Row hidden={['xl', 'l', 'xs', 'xxs']}>
+              <Carinfo carinfo={carState} className={styles.leftList} />
             </Row>
           </div>
         </Col>
         <Col l="16" s="18">
-        <div role="grid">
-          <Row>
-            <IceContainer className={styles.card}>
-              {/* <Mymap location={mapState} /> */}
-              <Mymap location={bindState} />
-            </IceContainer>
-          </Row>
-          {/* 底部按钮响应式显示 */}
-          <Row hidden={['l','xl']} wrap="true">
-            <img src="start.png" alt=""/>
-            <Button onClick={() => start()} className={styles.BottomBtn1}><span className="glyphicon glyphicon-off"></span>启动智能驾驶</Button>
-          
-            <Button onClick={() => slowStop()} className={styles.BottomBtn2}><span className="glyphicon glyphicon-refresh"></span>缓停开关</Button>
-          
-            <Button onClick={() => emergencyStop()} className={styles.BottomBtn3}><span className="glyphicon glyphicon-exclamation-sign"></span>急停开关</Button>
-          </Row>
+          <div role="grid">
+            <Row>
+              <IceContainer className={styles.card}>
+                {/* <Mymap location={mapState} /> */}
+                <Mymap mapdata={bindState} />
+              </IceContainer>
+            </Row>
+            {/* 底部按钮响应式显示 */}
+            <Row hidden={['l', 'xl']} wrap="true">
+              <img src="start.png" alt="" />
+              <Button onClick={() => start()} disabled={startState} className={styles.BottomBtn1}><span className="glyphicon glyphicon-off" />启动智能驾驶</Button>
+
+              <Button onClick={() => slowStop()} disabled={startState} className={styles.BottomBtn2}><span className="glyphicon glyphicon-refresh" />缓停开关</Button>
+
+              <Button onClick={() => emergencyStop()} disabled={startState} className={styles.BottomBtn3}><span className="glyphicon glyphicon-exclamation-sign" />急停开关</Button>
+            </Row>
           </div>
         </Col>
-        <Col l="4"  hidden={['m','s','xs', 'xxs']}>
-          <Carinfo carinfo={carState}></Carinfo>
+        <Col l="4" hidden={['m', 's', 'xs', 'xxs']}>
+          <Carinfo carinfo={carState} />
         </Col>
       </Row>
       <div className={styles.BottomBtnContainer}>
         <div role="grid">
-        <Row gutter="20" wrap="true" hidden={['m','s','xs','xxs']}>
-          <Col span='4'></Col>
-          <Col span='16' className={styles.btnSecContainer} >
-            <img src="start.png" alt=""/>
-            <Button onClick={() => start()} className={styles.BottomBtn1}><span className="glyphicon glyphicon-off "></span>启动智能驾驶</Button>
-          
-          <Button onClick={() => slowStop()} className={styles.BottomBtn2}><span className="glyphicon glyphicon-refresh "></span>缓停开关</Button>
-        
-          <Button onClick={() => emergencyStop()} className={styles.BottomBtn3}><span className="glyphicon glyphicon-exclamation-sign "></span>急停开关</Button>
-          </Col>
-          <Col span='4'></Col>
-        </Row>
+          <Row gutter="20" wrap="true" hidden={['m', 's', 'xs', 'xxs']}>
+            <Col span='4' />
+            <Col span='16' className={styles.btnSecContainer} >
+              <img src="start.png" alt="" />
+              <Button onClick={() => start()} disabled={startState} className={styles.BottomBtn1}><span className="glyphicon glyphicon-off " />启动智能驾驶</Button>
+
+              <Button onClick={() => slowStop()} disabled={startState} className={styles.BottomBtn2}><span className="glyphicon glyphicon-refresh " />缓停开关</Button>
+
+              <Button onClick={() => emergencyStop()} disabled={startState} className={styles.BottomBtn3}><span className="glyphicon glyphicon-exclamation-sign " />急停开关</Button>
+            </Col>
+            <Col span='4' />
+          </Row>
         </div>
-      </div>  
-    </div>
+      </div>
+    </div >
   );
 }

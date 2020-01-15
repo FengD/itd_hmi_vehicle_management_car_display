@@ -26,9 +26,7 @@
   
 }
 
-.BottomBtnContainer{
-  padding:0 auto;
-}
+
 .btnSecContainer{
   width: auto;
   padding:0 auto;
@@ -116,6 +114,11 @@
     .leftBtnItem{
       width: 130px !important;
     }
+  }
+
+  .BottomBtnContainer{
+    padding-left: 8%;
+    
   }
   .leftBtnItem{
     display: inline-block;

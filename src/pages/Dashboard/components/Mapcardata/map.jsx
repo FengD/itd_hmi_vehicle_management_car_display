@@ -1,4 +1,4 @@
-import { Map, Marker, Polyline, Markers } from 'react-amap';
+import { Map, Marker, Polyline } from 'react-amap';
 import React from 'react';
 // import PubSub from 'pubsub-js';
 
