@@ -9,31 +9,30 @@
 }
 
 .mapcentre {
-    padding-top: 5%;
-    margin: auto;
-    width: 80%;
+  padding-top: 5%;
+  margin: auto;
+  width: 80%;
 }
 
-.RouteContainer{
-    height: 320px;
-    padding: 0 auto !important;
+.RouteContainer {
+  width: 100%;
+  height: 320px;
+  padding: 0 auto !important;
 }
 
-.RouteList{
-
-  
+.RouteList {
   padding: 100px !important;
-  
 }
 
-
-.btnSecContainer{
+.btnSecContainer {
   width: auto;
-  padding:0 auto;
+  padding: 0 auto;
   margin-left: 6%;
 }
-
-.BottomBtn1{
+.fBtn {
+  margin-left: 10%;
+}
+.BottomBtn1 {
   display: inline-block;
   width: 200px;
   height: 40px !important;
@@ -46,7 +45,7 @@
   border: 1px solid transparent !important;
   border-radius: 4px !important;
 }
-.BottomBtn2{
+.BottomBtn2 {
   display: inline-block;
   width: 200px;
   height: 40px !important;
@@ -59,7 +58,7 @@
   border: 1px solid transparent !important;
   border-radius: 4px !important;
 }
-.BottomBtn3{
+.BottomBtn3 {
   display: inline-block;
   width: 200px;
   height: 40px !important;
@@ -72,7 +71,7 @@
   border: 1px solid transparent !important;
   border-radius: 4px !important;
 }
-.leftList{
+.leftList {
   width: 100%;
 }
 .title {
@@ -83,69 +82,78 @@
   // color: red;BottomBtnContainer
   border-bottom: 1px solid #dcdee3;
 }
- .leftBtn{
+.leftBtn {
   margin-top: 20px;
   margin-bottom: 20px;
 }
 // 兼容手机设备居中
-  
-  @media only screen and(min-width:375px)and(max-width:667px){
-  // iphoneX 6 7
-  
-    .BottomBtn1,.BottomBtn2,.BottomBtn3{
-      margin-left: 21% !important;
-    }
-  
-  }
-  
-  
-  @media only screen and(min-width:414px)and(max-width:736px){
-  
-  
-    .BottomBtn1,.BottomBtn2,.BottomBtn3{
-      margin-left: 23% !important;
-    }
-  }
-  @media only screen  and (min-width : 768px)  and (max-width:1024px)
-  {//iPad
-    .BottomBtn1,.BottomBtn2,.BottomBtn3{
-      width: 150px !important;
-    }
-    .leftBtnItem{
-      width: 130px !important;
-    }
-  }
 
-  .BottomBtnContainer{
-    padding-left: 8%;
-    
+@media only screen and(min-width:375px) and(max-width:667px) {
+  // iphoneX 6 7
+
+  .BottomBtn1,
+  .BottomBtn2,
+  .BottomBtn3 {
+    margin-left: 21% !important;
   }
-  .leftBtnItem{
-    display: inline-block;
-    opacity: 0.6;
-    height: 40px !important;
-    color: #fff !important;
-    background-color: #204d74 !important;
-    border-color: #122b40 !important;
-    margin-top: 15px !important;
-    font-weight: 400 !important;
-    line-height: 1.42857143 !important;
-    border: 1px solid transparent !important;
-    border-radius: 4px !important;
+}
+
+@media only screen and(min-width:414px) and(max-width:736px) {
+  .BottomBtn1,
+  .BottomBtn2,
+  .BottomBtn3 {
+    margin-left: 23% !important;
   }
-.leftBtnItem:hover{
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  //iPad
+  .BottomBtn1,
+  .BottomBtn2,
+  .BottomBtn3 {
+    width: 150px !important;
+  }
+  .leftBtnItem {
+    width: 130px !important;
+  }
+}
+
+.BottomBtnContainer {
+  padding-left: 8%;
+}
+.leftBtnItem {
+  display: inline-block;
+  opacity: 0.6;
+  height: 40px !important;
+  color: #fff !important;
+  background-color: #204d74 !important;
+  border-color: #122b40 !important;
+  margin-top: 15px !important;
+  font-weight: 400 !important;
+  line-height: 1.42857143 !important;
+  border: 1px solid transparent !important;
+  border-radius: 4px !important;
+}
+.leftBtnItem:hover {
   opacity: 1;
 }
-.BottomBtn1 span{
+.BottomBtn1 span {
   margin-right: 10px;
 }
-.BottomBtn2 span{
+.BottomBtn2 span {
   margin-right: 10px;
 }
-.BottomBtn3 span{
+.BottomBtn3 span {
   margin-right: 10px;
 }
 //选中路线按钮后添加的样式 待定
-.BtnActive{
+.BtnActive {
   opacity: 1;
+}
+//map标记
+.startPoint{
+  padding: 8;
+  margin: 0;
+  border: 1px solid red;
+  color: #204d74;
+  font-size: 30px;
 }

@@ -6,7 +6,6 @@ export default function RouteButton(props) {
     const styleBtn = {
         width: 150,
     };
-    console.log("name", props.name);
     return (<div className={styles.leftBtn}>
         <Button type="secondary" style={styleBtn} className={styles.leftBtnItem}>{props.name}</Button>
     </div>);

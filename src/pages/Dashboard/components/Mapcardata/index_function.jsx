@@ -5,8 +5,6 @@ import Carinfo from '../Carinfos';
 import styles from './index.module.scss';
 import Mymap from './map';
 import RouteButton from './routeButton';
-
-
 import stores from '@/stores/index';
 import { useRequest } from '@/utils/request';
 // import { routeName, routeInfo, start, slowStop, emergencyStop } from '@/config/dataSource';
@@ -120,6 +118,8 @@ export default function Mapcardata() {
   function DrawMarker(arr) {
     return Array(arr.length).fill(true).map((e, idx) => ({
       position: arr[idx],
+      icon: "./car.png",
+      content: idx,
       myIndex: idx,
     }));
   };
@@ -127,6 +127,7 @@ export default function Mapcardata() {
   // use two states to describe start/end points
   function drwaStartPoints() {
     // const startState = DrawMarker(routePointStart);
+    console.log("startState", DrawMarker(routePointStart));
     setBindState(Object.assign({}, bindState, { "startMarkers": DrawMarker(routePointStart) }));
   };
 
@@ -193,11 +194,11 @@ export default function Mapcardata() {
       <Row gutter="20" wrap="true">
         <Col l="4" s="6" hidden={['xs', 'xxs']}>
           <div role="grid">
-            <Row>
-              <IceContainer className={[styles.RouteContainer, styles.leftList]}>
-                <h3 className={styles.title}>车辆路线</h3>
+            <Row >
+              <IceContainer className={styles.RouteContainer}>
+                <h3 className={styles.title}>可选择路线</h3>
                 {routeNameId.map((route) =>
-                  (<div onClick={() => getRouteJson(route.route_id)}
+                  (<div className={styles.fBtn} onClick={() => getRouteJson(route.route_id)}
                     key={Math.random()}>
                     <RouteButton className={styles.RouteList} name={route.name} />
                   </div>)
@@ -205,9 +206,17 @@ export default function Mapcardata() {
               </IceContainer>
             </Row>
 
-            <Button  onClick={() => drwaStartPoints()}>选择起点</Button>
-            <br />
-            <Button  onClick={() => drawEndPoints()}>选择终点</Button>
+            <Row>
+              <IceContainer className={styles.RouteContainer}>
+                <h3 className={styles.title}>起始点选择</h3>
+                <br />
+                <Button onClick={() => drwaStartPoints()} className={styles.leftBtnItem}
+                  style={{ width: 150 }}>选择起点</Button>
+                <br />
+                <Button onClick={() => drawEndPoints()} className={styles.leftBtnItem}
+                  style={{ width: 150 }}>选择终点</Button>
+              </IceContainer>
+            </Row>
 
             {/* 右侧车辆情况内容 */}
             <Row hidden={['xl', 'l', 'xs', 'xxs']}>
