@@ -197,24 +197,28 @@ export default function Mapcardata() {
             <Row >
               <IceContainer className={styles.RouteContainer}>
                 <h3 className={styles.title}>可选择路线</h3>
-                {routeNameId.map((route) =>
-                  (<div className={styles.fBtn} onClick={() => getRouteJson(route.route_id)}
-                    key={Math.random()}>
-                    <RouteButton className={styles.RouteList} name={route.name} />
-                  </div>)
-                )}
+               
+                  {routeNameId.map((route) =>
+                    (<div className={styles.leftRouteBtn} onClick={() => getRouteJson(route.route_id)}
+                      key={Math.random()}>
+                      <RouteButton className={styles.RouteList} name={route.name} />
+                    </div>)
+                  )}
+                
               </IceContainer>
             </Row>
 
             <Row>
               <IceContainer className={styles.RouteContainer}>
                 <h3 className={styles.title}>起始点选择</h3>
-                <br />
-                <Button onClick={() => drwaStartPoints()} className={styles.leftBtnItem}
+                <div className={styles.leftRouteBtn}> 
+                <Button onClick={() => drwaStartPoints()} className={`${styles.leftBtnItem} ${styles.leftBtn}`}
                   style={{ width: 150 }}>选择起点</Button>
-                <br />
-                <Button onClick={() => drawEndPoints()} className={styles.leftBtnItem}
+               </div>
+               <div className={styles.leftRouteBtn}>
+                <Button onClick={() => drawEndPoints()} className={`${styles.leftBtnItem} ${styles.leftBtn}`}
                   style={{ width: 150 }}>选择终点</Button>
+                </div>  
               </IceContainer>
             </Row>
 
@@ -234,7 +238,7 @@ export default function Mapcardata() {
               </IceContainer>
             </Row>
             {/* 底部按钮响应式显示 */}
-            <Row hidden={['l', 'xl']} wrap="true">
+            <Row  wrap="true" className={styles.BottomBtnContainer}>
               <img src="start.png" alt="" />
               <Button onClick={() => start()} disabled={startState} className={styles.BottomBtn1}><span className="glyphicon glyphicon-off" />启动智能驾驶</Button>
 
@@ -248,7 +252,7 @@ export default function Mapcardata() {
           <Carinfo carinfo={carState} />
         </Col>
       </Row>
-      <div className={styles.BottomBtnContainer}>
+      {/* <div className={styles.BottomBtnContainer}>
         <div role="grid">
           <Row gutter="20" wrap="true" hidden={['m', 's', 'xs', 'xxs']}>
             <Col span='4' />
@@ -263,7 +267,7 @@ export default function Mapcardata() {
             <Col span='4' />
           </Row>
         </div>
-      </div>
+      </div> */}
     </div >
   );
 }

@@ -1,0 +1,8 @@
+// 引用主题变量
+@import "variables.scss";
+
+// 引用基础主题
+@import "~@alifd/next/index-noreset.scss";
+
+// 引用自定义icon
+@import "icons.scss";

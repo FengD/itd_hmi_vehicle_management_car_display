@@ -16,8 +16,16 @@
 
 .RouteContainer {
   width: 100%;
-  height: 320px;
+  height: auto;
   padding: 0 auto !important;
+}
+.RouteBtnContainer{
+  margin-top: 20px;
+}
+.RouteBtnContainer button
+{
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .RouteList {
@@ -29,9 +37,7 @@
   padding: 0 auto;
   margin-left: 6%;
 }
-.fBtn {
-  margin-left: 10%;
-}
+
 .BottomBtn1 {
   display: inline-block;
   width: 200px;
@@ -44,6 +50,7 @@
   line-height: 1.42857143 !important;
   border: 1px solid transparent !important;
   border-radius: 4px !important;
+  transition:all 0.5 ease;
 }
 .BottomBtn2 {
   display: inline-block;
@@ -57,6 +64,7 @@
   line-height: 1.42857143 !important;
   border: 1px solid transparent !important;
   border-radius: 4px !important;
+  transition:all 0.5 ease;
 }
 .BottomBtn3 {
   display: inline-block;
@@ -70,12 +78,34 @@
   line-height: 1.42857143 !important;
   border: 1px solid transparent !important;
   border-radius: 4px !important;
+  transition:all 0.5 ease;
+}
+.BottomBtn1:hover{
+  box-shadow:0 26px 40px -24px rgba(0,36,100,.3);
+  transform:translateY(-6px);
+  transition:all 0.5 ease
+}
+.BottomBtn2:hover{
+  box-shadow:0 26px 40px -24px rgba(0,36,100,.3);
+  transform:translateY(-6px);
+  transition:all 0.5 ease
+}
+.BottomBtn3:hover{
+  box-shadow:0 26px 40px -24px rgba(0,36,100,.3);
+  transform:translateY(-6px);
+  transition:all 0.5 ease
 }
 .leftList {
   width: 100%;
 }
+.leftRouteBtn{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 .title {
   margin: 0;
+  text-align: center;
   padding-bottom: 3px;
   font-size: 20px;
   padding-bottom: 10px;
@@ -83,8 +113,8 @@
   border-bottom: 1px solid #dcdee3;
 }
 .leftBtn {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 // 兼容手机设备居中
 
@@ -118,7 +148,10 @@
 }
 
 .BottomBtnContainer {
-  padding-left: 8%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
 }
 .leftBtnItem {
   display: inline-block;
@@ -157,3 +190,5 @@
   color: #204d74;
   font-size: 30px;
 }
+
+// 右侧车辆数据样式
