@@ -1,0 +1,196 @@
+.point {
+  stroke: #fff !important;
+}
+
+.card {
+  //height: 320;
+  padding: 0 20px !important;
+  width: 100%;
+}
+
+.mapcentre {
+  padding-top: 5%;
+  margin: auto;
+  width: 80%;
+}
+
+.RouteContainer {
+  width: 100%;
+  height: auto;
+  padding: 0 auto !important;
+}
+.RouteBtnContainer {
+  margin-top: 20px;
+}
+.RouteBtnContainer button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.RouteList {
+  padding: 100px !important;
+}
+
+.btnSecContainer {
+  width: auto;
+  padding: 0 auto;
+  margin-left: 6%;
+}
+
+.BottomBtn1 {
+  display: inline-block;
+  width: 200px;
+  height: 40px !important;
+  color: #fff !important;
+  background-color: #204d74 !important;
+  border-color: #122b40 !important;
+  margin: 15px !important;
+  font-weight: 400 !important;
+  line-height: 1.42857143 !important;
+  border: 1px solid transparent !important;
+  border-radius: 4px !important;
+  transition: all 0.5 ease;
+}
+.BottomBtn2 {
+  display: inline-block;
+  width: 200px;
+  height: 40px !important;
+  color: #fff !important;
+  background-color: #d58512 !important;
+  border-color: #985f0d !important;
+  margin: 15px !important;
+  font-weight: 400 !important;
+  line-height: 1.42857143 !important;
+  border: 1px solid transparent !important;
+  border-radius: 4px !important;
+  transition: all 0.5 ease;
+}
+.BottomBtn3 {
+  display: inline-block;
+  width: 200px;
+  height: 40px !important;
+  color: #fff !important;
+  background-color: #d9534f !important;
+  border-color: #d43f3a !important;
+  margin: 15px !important ;
+  font-weight: 400 !important;
+  line-height: 1.42857143 !important;
+  border: 1px solid transparent !important;
+  border-radius: 4px !important;
+  transition: all 0.5 ease;
+}
+.BottomBtn1:hover {
+  box-shadow: 0 26px 40px -24px rgba(0, 36, 100, 0.3);
+  transform: translateY(-6px);
+  transition: all 0.5 ease;
+}
+.BottomBtn2:hover {
+  box-shadow: 0 26px 40px -24px rgba(0, 36, 100, 0.3);
+  transform: translateY(-6px);
+  transition: all 0.5 ease;
+}
+.BottomBtn3:hover {
+  box-shadow: 0 26px 40px -24px rgba(0, 36, 100, 0.3);
+  transform: translateY(-6px);
+  transition: all 0.5 ease;
+}
+.leftList {
+  width: 100%;
+}
+.leftRouteBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.title {
+  margin: 0;
+  text-align: center;
+  padding-bottom: 3px;
+  font-size: 20px;
+  padding-bottom: 10px;
+  // color: red;BottomBtnContainer
+  border-bottom: 1px solid #dcdee3;
+}
+.leftBtn {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+// 兼容手机设备居中
+
+@media only screen and(min-width:375px) and(max-width:667px) {
+  // iphoneX 6 7
+
+  .BottomBtn1,
+  .BottomBtn2,
+  .BottomBtn3 {
+    margin-left: 21% !important;
+  }
+}
+
+@media only screen and(min-width:414px) and(max-width:736px) {
+  .BottomBtn1,
+  .BottomBtn2,
+  .BottomBtn3 {
+    margin-left: 23% !important;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  //iPad
+  .BottomBtn1,
+  .BottomBtn2,
+  .BottomBtn3 {
+    width: 150px !important;
+  }
+  .leftBtnItem {
+    width: 130px !important;
+  }
+}
+
+.BottomBtnContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+}
+.leftBtnItem {
+  display: inline-block;
+  opacity: 0.6;
+  height: 40px !important;
+  color: #fff !important;
+  background-color: #204d74 !important;
+  border-color: #122b40 !important;
+  margin-top: 15px !important;
+  font-weight: 400 !important;
+  line-height: 1.42857143 !important;
+  border: 1px solid transparent !important;
+  border-radius: 4px !important;
+}
+.leftBtnItem:hover {
+  opacity: 1;
+}
+.BottomBtn1 span {
+  margin-right: 10px;
+}
+.BottomBtn2 span {
+  margin-right: 10px;
+}
+.BottomBtn3 span {
+  margin-right: 10px;
+}
+//选中路线按钮后添加的样式 待定
+.BtnActive {
+  opacity: 1;
+}
+//map标记
+.startPoint {
+  padding: 0px;
+  // margin: 1000px;
+  // margin-right: -50px;
+  border: 1px solid red;
+  color: #204d74;
+  font-size: 30px;
+  // left: 200000px;
+  // offset: {10, 10};
+}
+
+// 右侧车辆数据样式
