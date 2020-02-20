@@ -80,23 +80,26 @@ export const register = {
 //   headers: { token: localStorage.getItem('token') },
 // };
 
-export const start = {
-  baseURL: `http://${serverIp}`,
-  url: `/car/${localStorage.getItem('carId')}/action/start`,
-  method: 'POST',
-  headers: { token: localStorage.getItem('token') },
-};
+// export const start = {
+//   baseURL: `http://${serverIp}`,
+//   url: `/handleDriveAction/send?carName=${localStorage.getItem('carName')}
+//   &path=${localStorage.getItem('routeId')}&advSwitch=0`,
+//   method: 'POST',
+//   headers: { token: localStorage.getItem('token') },
+// };
 
-export const slowStop = {
-  baseURL: `http://${serverIp}`,
-  url: `/car/${localStorage.getItem('carId')}/action/slow_stop`,
-  method: 'POST',
-  headers: { token: localStorage.getItem('token') },
-};
+// export const slowStop = {
+//   baseURL: `http://${serverIp}`,
+//   url: `/handleDriveAction/send?carName=${localStorage.getItem('carName')}
+//   &path=${localStorage.getItem('routeId')}&advSwitch=1`,
+//   method: 'POST',
+//   headers: { token: localStorage.getItem('token') },
+// };
 
-export const emergencyStop = {
-  baseURL: `http://${serverIp}`,
-  url: `/car/${localStorage.getItem('carId')}/action/emergency_stop`,
-  method: 'POST',
-  headers: { token: localStorage.getItem('token') },
-};
+// export const emergencyStop = {
+//   baseURL: `http://${serverIp}`,
+//   url: `/handleDriveAction/send?carName=${localStorage.getItem('carName')}
+//   &path=${localStorage.getItem('routeId')}&advSwitch=2`,
+//   method: 'POST',
+//   headers: { token: localStorage.getItem('token') },
+// };

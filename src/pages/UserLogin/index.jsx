@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 // import FoundationSymbol from '@icedesign/foundation-symbol';
 import { Input, Checkbox, Grid, Form, Message } from '@alifd/next';
 import { useRequest } from '@/utils/request';
@@ -40,6 +40,7 @@ function UserLogin(props) {
       console.log('loginRes', loginRes);
       localStorage.setItem('token', loginRes.data.token);
       localStorage.setItem('carId', loginRes.data.car.car_id);
+      localStorage.setItem('carName', loginRes.data.car.type);
       localStorage.setItem('loginStatus', loginRes.data.status);
       Message.success('登录成功');
       props.history.push('/dashboard');
@@ -73,11 +74,11 @@ function UserLogin(props) {
               placeholder="密码"
             />
           </FormItem>
-          <FormItem>
+          {/* <FormItem>
             <Checkbox name="checkbox" className={styles.checkbox}>
               记住账号
             </Checkbox>
-          </FormItem>
+          </FormItem> */}
           <Row className={styles.formItem}>
             <Form.Submit
               type="primary"
@@ -96,11 +97,11 @@ function UserLogin(props) {
             </p> */}
           </Row>
 
-          <Row className="tips">
+          {/* <Row className="tips">
             <Link to="/car/register" className={styles.tipsText}>
               立即注册
             </Link>
-          </Row>
+          </Row> */}
         </Form>
       </div>
     </div>

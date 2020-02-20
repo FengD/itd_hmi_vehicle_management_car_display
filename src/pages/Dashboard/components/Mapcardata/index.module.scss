@@ -19,11 +19,10 @@
   height: auto;
   padding: 0 auto !important;
 }
-.RouteBtnContainer{
+.RouteBtnContainer {
   margin-top: 20px;
 }
-.RouteBtnContainer button
-{
+.RouteBtnContainer button {
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -50,7 +49,7 @@
   line-height: 1.42857143 !important;
   border: 1px solid transparent !important;
   border-radius: 4px !important;
-  transition:all 0.5 ease;
+  transition: all 0.5 ease;
 }
 .BottomBtn2 {
   display: inline-block;
@@ -64,7 +63,7 @@
   line-height: 1.42857143 !important;
   border: 1px solid transparent !important;
   border-radius: 4px !important;
-  transition:all 0.5 ease;
+  transition: all 0.5 ease;
 }
 .BottomBtn3 {
   display: inline-block;
@@ -78,27 +77,27 @@
   line-height: 1.42857143 !important;
   border: 1px solid transparent !important;
   border-radius: 4px !important;
-  transition:all 0.5 ease;
+  transition: all 0.5 ease;
 }
-.BottomBtn1:hover{
-  box-shadow:0 26px 40px -24px rgba(0,36,100,.3);
-  transform:translateY(-6px);
-  transition:all 0.5 ease
+.BottomBtn1:hover {
+  box-shadow: 0 26px 40px -24px rgba(0, 36, 100, 0.3);
+  transform: translateY(-6px);
+  transition: all 0.5 ease;
 }
-.BottomBtn2:hover{
-  box-shadow:0 26px 40px -24px rgba(0,36,100,.3);
-  transform:translateY(-6px);
-  transition:all 0.5 ease
+.BottomBtn2:hover {
+  box-shadow: 0 26px 40px -24px rgba(0, 36, 100, 0.3);
+  transform: translateY(-6px);
+  transition: all 0.5 ease;
 }
-.BottomBtn3:hover{
-  box-shadow:0 26px 40px -24px rgba(0,36,100,.3);
-  transform:translateY(-6px);
-  transition:all 0.5 ease
+.BottomBtn3:hover {
+  box-shadow: 0 26px 40px -24px rgba(0, 36, 100, 0.3);
+  transform: translateY(-6px);
+  transition: all 0.5 ease;
 }
 .leftList {
   width: 100%;
 }
-.leftRouteBtn{
+.leftRouteBtn {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -183,12 +182,15 @@
   opacity: 1;
 }
 //map标记
-.startPoint{
-  padding: 8;
-  margin: 0;
+.startPoint {
+  padding: 0px;
+  // margin: 1000px;
+  // margin-right: -50px;
   border: 1px solid red;
   color: #204d74;
   font-size: 30px;
+  // left: 200000px;
+  // offset: {10, 10};
 }
 
 // 右侧车辆数据样式

@@ -12,11 +12,11 @@ export default {
     carInfo: [],
     async fetchData(token, carId) {
         carProfile.headers = { token };
-        carProfile.url = `/car/${carId}/profile`;
+        carProfile.url = `/carDisplay/${carId}`;
         try {
             const { data } = await request(carProfile);
             this.carInfo = data.data;
-            console.log("data.data", data.data);
+            // console.log("data.data", data.data);
         } catch (err) {
             console.log("fetchDataErr", err);
         }

@@ -2,7 +2,8 @@ import { Button } from '@alifd/next';
 import React from 'react';
 import styles from './index.module.scss';
 
-export default function RouteButton(props) {
+function RouteButton(props) {
+    // console.log("RouteButton", props);
     const styleBtn = {
         width: 150,
     };
@@ -10,3 +11,5 @@ export default function RouteButton(props) {
         <Button type="secondary" style={styleBtn} className={styles.leftBtnItem}>{props.name}</Button>
     </div>);
 }
+
+export default React.memo(RouteButton);

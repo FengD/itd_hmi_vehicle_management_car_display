@@ -12,7 +12,7 @@ export default {
     routeNameId: [],
     async fetchRouteData(token, carId) {
         routeName.headers = { token };
-        routeName.url = `/route/car/${carId}`;
+        routeName.url = `/routeDisplay/car/${carId}`;
         try {
             const { data } = await request(routeName);
             this.routeNameId = data.data;

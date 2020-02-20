@@ -11,7 +11,6 @@ import { logout } from '@/config/dataSource';
 
 function Header(props) {
   const { request } = useRequest(logout);
-  console.log("logoutRequest", request);
 
   async function handleLogout() {
     try {
@@ -37,7 +36,6 @@ function Header(props) {
   // const { toggle } = expandAside;
 
   useEffect(() => {
-    console.log("test profile");
     fetchData(localStorage.getItem("token"), localStorage.getItem("carId"));
   }, [fetchData]);
 
@@ -58,7 +56,7 @@ function Header(props) {
           className={styles.userAvatar}
         />
         <span className={styles.userName}>
-          {carInfo.city}
+          {carInfo.name}
           <Icon className={styles.headerArrow} size="xs" type="arrow-down" />
         </span>
       </div>

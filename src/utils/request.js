@@ -23,7 +23,7 @@ export async function request(options) {
       return { response, data };
     }
   } catch (error) {
-    showError(error.message);
+    // showError(error.message);
     console.error(error);
     throw error;
   }
@@ -76,7 +76,7 @@ export function useRequest(options) {
         return { response, data };
       }
     } catch (error) {
-      showError(error.message);
+      // showError(error.message);
       dispatch({
         type: 'error',
         error,

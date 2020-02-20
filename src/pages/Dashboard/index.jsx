@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 // import Overview from './components/Overview';
-import Mapcardata from './components/Mapcardata/index_function';
+// import Mapcardata from './components/Mapcardata/index_function';
+import Mapcardata from './components/Mapcardata';
 // import Datacharts from './components/Datacharts';
 // import TopActiveChart from './components/TopActiveChart';
 

@@ -29,7 +29,7 @@ netcat dingfeng.website 9998
 
 {"carId":0,"msg":{"type":"current_position","content":{"latitude":31.3267172685216,"longitude":121.549210926099}}}
 
-{"carId":1,"msg":{"type":"current_position","content":{"latitude":31.3267172685216,"longitude":121.549210926099}}}
+{"carId":1,"msg":{"type":"current_position","content":{"latitude":31.3267332685216,"longitude":121.549210926099}}}
 
 {"carId":2,"msg":{"type":"current_position","content":{"latitude":30.3267172685216,"longitude":121.549210926099}}}
 

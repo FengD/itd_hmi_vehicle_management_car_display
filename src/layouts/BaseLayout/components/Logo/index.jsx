@@ -3,13 +3,17 @@ import styles from './index.module.scss';
 
 export default function Logo() {
   return (
-    <div  className={styles.logo}>
-      <span className={styles.brand}>LOGO</span>
-      <div className={styles.workbench}>
+    <div className={styles.logo}>
+      {/* <span className={styles.brand}>LOGO</span> */}
+      <img src={require('../../../../../public/logo.jpg')}
+        width={150}
+        height={44}
+        alt="" />
+      {/* <div className={styles.workbench}>
         设备管理
-        <br />
+         <br />
         工作台
-      </div>
+       </div> */}
     </div>
   );
 }

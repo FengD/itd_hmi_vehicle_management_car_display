@@ -24,7 +24,8 @@
     "react-amap": "^1.2.8",
     "react-dom": "^16.4.1",
     "react-intl": "^3.4.0",
-    "react-router-dom": "^5.0.1"
+    "react-router-dom": "^5.0.1",
+    "react-websocket": "^2.1.0"
   },
   "devDependencies": {
     "@ice/spec": "^0.1.1",

@@ -1,15 +1,19 @@
 import React from 'react';
-import { Icon } from '@alifd/next';
+// import { Icon } from '@alifd/next';
 // import { Link } from 'react-router-dom';
-import styles from './index.module.scss';
+// import styles from './index.module.scss';
 
 export default () => {
   return (
-    <div className={styles.container}>
-      <a href="http://www.hirain.com/" className={styles.logoLink}>
-        LOGO
-      </a>
-      <ul className={styles.navs}>
+    // <div className={styles.container}>
+    <div>
+      {/* <a href="http://www.hirain.com/" className={styles.logoLink}> */}
+      <img src={require('../../../../../public/logo.jpg')}
+        width={150}
+        height={50}
+        alt="" />
+      {/* </a> */}
+      {/* <ul className={styles.navs}>
         <li className={styles.navMenu}>
           <a href="#" className={styles.hb}>
             <img
@@ -39,7 +43,7 @@ export default () => {
             首页
           </a>
         </li>
-      </ul>
+      </ul> */}
     </div>
   );
 };

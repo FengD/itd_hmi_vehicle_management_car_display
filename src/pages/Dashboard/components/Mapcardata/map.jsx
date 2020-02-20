@@ -1,43 +1,48 @@
 import { Map, Marker, Polyline, Markers } from 'react-amap';
 import React from 'react';
 import styles from './index.module.scss';
-// import PubSub from 'pubsub-js';
 
-export default function Mymap(props) {
-  console.log("this.props.mapdata", props.mapdata);
+function MyMap(props) {
+  // console.log("myMap", props);
+  const plugins = [
+    // 'MapType',
+    // 'Scale',
+    // 'OverView',
+    // 'ControlBar', // v1.1.0 新增
+    {
+      name: 'ToolBar',
+      options: {
+        visible: true,  // 不设置该属性默认就是 true
+        onCreated(ins) {
+          // console.log(ins);
+        },
+      },
+    },
+  ];
+
   function renderMarkerLayout() {
-    // if (extData.myIndex === 3) {
-    //   return false;
-    // };
     // return <div style={style}>{extData.myLabel}</div>;
     return <div className={styles.startPoint}> <span className=" glyphicon glyphicon-map-marker  " /></div>;
+    // return <span className=" glyphicon glyphicon-map-marker  " />;
     // return <span className=" glyphicon glyphicon-map-marker  "/>;
     // return <div style={styles.startPoint} />;
     // return <Marker
     //   icon={require('../../../../../public/car.png')}
     // />;
+    // return <img src={require('../../../../../public/car.png')}  alt='111'/>;
   };
 
   const markersStartEvent = {
     click: (MapsOption, marker) => {
-      console.log(MapsOption);
+      // console.log(MapsOption);
       // console.log("myIndex", marker.getExtData().myIndex);
-      console.log(marker);
+      // console.log(marker);
       // document.getElementById("endPoint").value = "(" + marker.B.position.lng + "," + marker.B.position.lat + ")";
       props.selectStartPoint([{
         longitude: marker.B.position.lng,
         latitude: marker.B.position.lat,
       }]);
-      marker.render(renderMarkerLayout);
-      // marker.render(
-      //   <div className={styles.startPoint}> <span className=" glyphicon glyphicon-map-marker  "/></div>
-      // );
-      // marker.render(
-      //   <Marker className={styles.startPoint}> 
-      //   <span className=" glyphicon glyphicon-map-marker  "/>
-      //   </Marker>
-      // );
-      // marker.render(<Marker icon={require('../../../../../public/car.png') }/>);
+      // marker.render(renderMarkerLayout);
     },
   };
 
@@ -47,31 +52,32 @@ export default function Mymap(props) {
       props.selectEndPoint([{
         longitude: marker.B.position.lng,
         latitude: marker.B.position.lat,
-      }], props.mapdata.startMarkers);
+      }], props.startPoint.startMarkers);
     },
   };
 
   return (<div>
     <div style={{ width: '100%', height: window.innerHeight * 0.7 }}>
-      <Map center={props.mapdata.center} zoom={5}>
+      <Map zoom={10} plugins={plugins} center={props.routeJson.center}>
         <Polyline
-          path={props.mapdata.json}
+          path={props.routeJson.json}
         />
         <Marker
-          position={props.mapdata.map}
+          position={props.carLocation}
+          //
           icon={require('../../../../../public/car.png')}
         />
         <Markers
-          markers={props.mapdata.startMarkers}
+          markers={props.startPoint.startMarkers}
           events={markersStartEvent}
-          render={renderMarkerLayout}
+          // render={renderMarkerLayout}
         />
         <Markers
-          markers={props.mapdata.endMarkers}
+          markers={props.endPoint.endMarkers}
           events={markersEndEvent}
         />
         <Polyline
-          path={props.mapdata.pointRoute}
+          path={props.endPoint.pointRoute}
           showDir={1}
         />
       </Map>
@@ -79,3 +85,5 @@ export default function Mymap(props) {
     </div>
   </div>);
 }
+
+export default React.memo(MyMap);
